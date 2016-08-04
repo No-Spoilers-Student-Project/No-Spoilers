@@ -1,3 +1,5 @@
+'use strict';
+
 const installmentToHtml = Handlebars.compile($('#epsode-details-template').html());
 const id = url('?id');
 const token = Cookies.get('token');

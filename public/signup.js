@@ -1,3 +1,5 @@
+'use strict';
+
 $('#signup-form button').on('click', event => {
   event.preventDefault();
   

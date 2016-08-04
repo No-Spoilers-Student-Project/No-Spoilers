@@ -1,3 +1,5 @@
+'use strict';
+
 const token = Cookies.get('token');
 
 $.getJSON('/api/series', function(result) {
