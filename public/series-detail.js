@@ -1,3 +1,5 @@
+'use strict';
+
 const seriesToHtml = Handlebars.compile($('#series-details-template').html());
 const installmentsToHtml = Handlebars.compile($('#installment-list-template').html());
 const id = url('?id');

@@ -1,3 +1,5 @@
+'use strict';
+
 const token = Cookies.get('token');
 
 $('#series-form button').on('click', event => {
