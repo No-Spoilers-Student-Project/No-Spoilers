@@ -7,26 +7,26 @@ $.getJSON('/api/series', function(result) {
   });
 });
 
-$('#episode-form button').on('click', event => {
+$('#installment-form button').on('click', event => {
   event.preventDefault();
   
   const data = {};
-  if($('#episode_title').val()) data.title = $('#episode_title').val();
+  if($('#installment_title').val()) data.title = $('#installment_title').val();
   if($('#series_id').val()) data.series = $('#series_id').val();
-  if($('#episode_medium').val()) data.medium = $('#episode_medium').val();
-  if($('#episode_length').val()) data.length = $('#episode_length').val();
-  if($('#episode_airdate').val()) data.airdate = $('#episode_airdate').val();
+  if($('#installment_medium').val()) data.medium = $('#installment_medium').val();
+  if($('#installment_length').val()) data.length = $('#installment_length').val();
+  if($('#installment_airdate').val()) data.airdate = $('#installment_airdate').val();
 
   if(!data.title) $('#notification-bar').text('Title Required');
   else {
     $.ajax({
-      url: '/api/episodes',
+      url: '/api/installments',
       type: 'POST',
       headers: { 'token': token },
       data: JSON.stringify(data)
     })  
     .done( function(result) {
-      window.location.href = 'episode-detail.html?id=' + result._id;
+      window.location.href = 'installment-detail.html?id=' + result._id;
     });
   }
 });

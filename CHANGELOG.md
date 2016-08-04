@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project attempts to adhere to [Semantic Versioning](http://semver.org/).
 No guarantees should be inferred.
 
+## [4.0.0] - 2016-08-04
+### Changes
+- Changed name to No Spoilers
+- Changed "Episodes" to "Installments"
+
 ## [3.1.0] - 2016-08-04
 ### Added
 - Sign Up page

@@ -1,11 +1,11 @@
-# Cf401 Lab08 Expressjs Single Resource Api
+# No Spoilers
 
-Author: Geoffrey Emerson  
+Authors: Geoffrey Emerson, Arielle Foldoe, Aaron Bini  
 Date: August 4th, 2016  
 
 ## About
 
-A small web app to store episodic series titles and some info about each. Uses Express.js and Mongo DB. Front end is a rudimentary demo of interactivity. API responds to GET, POST, PUT, and DELETE requests on `series` and `episodes` resources. User authentication is required for POST, PUT, and DELETE calls. Query `/api` for a list of endpoints.
+A small web app to store episodic series titles and some info about each. Uses Express.js and Mongo DB. Front end is a rudimentary demo of interactivity. API responds to GET, POST, PUT, and DELETE requests on `series` and `installments` resources. User authentication is required for POST, PUT, and DELETE calls. Query `/api` for a list of endpoints.
 
 ## Prerequisites:
 * [node.js](https://nodejs.org/en/)

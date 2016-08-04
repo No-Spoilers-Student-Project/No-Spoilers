@@ -6,36 +6,36 @@ require( '../lib/mongoose-setup' );
 
 chai.use(chaiHttp);
 
-const testToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3YTI4MjMyNGM2OTEyNDlhNzgxNmNkNCIsImlhdCI6MTQ3MDMyMTQxOH0.CyS3HE_hPBaPVAAfU2OGPKZQwgNyeRWDMB0FeL7fkKY';
+const testToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3YTNjMjlmNzZhYWM0MjFmMzQ5NzE1NCIsImlhdCI6MTQ3MDM0OTk4M30.EBAWwr_DFKR1UYHk4l1yiAEtnPDfgiIzg7_U90H13qY';
 
-describe('episode endpoints', () => {
+describe('installment endpoints', () => {
 
   const request = chai.request(app);
 
-  let testEpisode = { title: 'test-episode2', length: 42 };
-  let testEpisode1 = { title: 'test-episode3', length: 43 };
-  let testEpisode2 = { title: 'test-episode4', length: 44 };
-  let testBadEpisode = { title: '', length: 45 };
+  let testInstallment = { name: 'test-installment2', length: 42 };
+  let testInstallment1 = { name: 'test-installment3', length: 43 };
+  let testInstallment2 = { name: 'test-installment4', length: 44 };
+  let testBadInstallment = { name: '', length: 45 };
 
   before( done => {
     Promise.all([
-      request.post('/api/episodes').set('token',testToken).send(testEpisode),
-      request.post('/api/episodes').set('token',testToken).send(testEpisode1)
+      request.post('/api/installments').set('token',testToken).send(testInstallment),
+      request.post('/api/installments').set('token',testToken).send(testInstallment1)
     ])
     .then( result => {
-      testEpisode = JSON.parse(result[0].text);
-      testEpisode1 = JSON.parse(result[1].text);
+      testInstallment = JSON.parse(result[0].text);
+      testInstallment1 = JSON.parse(result[1].text);
       done();
     })
     .catch( err => {
-      console.log('before episode err:',err.response.text);
+      console.log('before installment err:',err.response.text);
       done(err);
     });
   });
 
   it('/GET on root route returns all', done => {
     request
-      .get('/api/episodes')
+      .get('/api/installments')
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.statusCode, 200);
@@ -46,54 +46,54 @@ describe('episode endpoints', () => {
       });
   });
 
-  it('/GET on episode id returns episode data', done => {
+  it('/GET on installment id returns installment data', done => {
     request
-      .get(`/api/episodes/${testEpisode1._id}`)
+      .get(`/api/installments/${testInstallment1._id}`)
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.statusCode, 200);
         assert.include(res.header['content-type'], 'application/json');
         let result = JSON.parse(res.text);
-        assert.deepEqual(result, testEpisode1);
+        assert.deepEqual(result, testInstallment1);
         done();
       });
   });
 
   it('/POST method completes successfully', done => {
     request
-      .post('/api/episodes')
+      .post('/api/installments')
       .set('token',testToken)
-      .send(testEpisode2)
+      .send(testInstallment2)
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.statusCode, 200);
         assert.include(res.header['content-type'], 'application/json');
         let result = JSON.parse(res.text);
-        assert.equal(result.title, testEpisode2.title);
-        assert.equal(result.length, testEpisode2.length);
-        testEpisode2 = result;
+        assert.equal(result.title, testInstallment2.title);
+        assert.equal(result.length, testInstallment2.length);
+        testInstallment2 = result;
         done();
       });
   });
 
   it('/POST validates title property', done => {
     request
-      .post('/api/episodes')
+      .post('/api/installments')
       .set('token',testToken)
-      .send(testBadEpisode)
+      .send(testBadInstallment)
       .end((err, res) => {
         if (!err) return done(res);
         assert.equal(res.statusCode, 400);
         assert.include(res.header['content-type'], 'application/json');
         let result = JSON.parse(res.text);
-        assert.notEqual(result.length, testBadEpisode.length);
+        assert.notEqual(result.length, testBadInstallment.length);
         done();
       });
   });
 
   it('/POST method gives error with bad json in request', done => {
     request
-      .post('/api/episodes')
+      .post('/api/installments')
       .set('token',testToken)
       .send('{"invalid"}')
       .end( (err,res) => {
@@ -109,52 +109,52 @@ describe('episode endpoints', () => {
   });
 
   it('/PUT method completes successfully', done => {
-    testEpisode.title = 'test-put';
-    const putUrl = `/api/episodes/${testEpisode._id}`;
+    testInstallment.name = 'test-put';
+    const putUrl = `/api/installments/${testInstallment._id}`;
     request
       .put(putUrl)
       .set('token',testToken)
-      .send(testEpisode)
+      .send(testInstallment)
       .end((err, res) => {
         if (err) return done(err);
         let result = JSON.parse(res.text);
         assert.equal(res.statusCode, 200);
         assert.include(res.header['content-type'], 'application/json');
-        assert.equal(result.title, testEpisode.title, JSON.stringify(result));
+        assert.equal(result.name, testInstallment.name, JSON.stringify(result));
         done();
       });
   });
 
-  it('/GET on recently updated episode returns correct changes', done => {
+  it('/GET on recently updated installment returns correct changes', done => {
     request
-      .get(`/api/episodes/${testEpisode._id}`)
+      .get(`/api/installments/${testInstallment._id}`)
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.statusCode, 200);
         assert.include(res.header['content-type'], 'application/json');
         let result = JSON.parse(res.text);
-        assert.equal(result.title, testEpisode.title, res.text);
+        assert.equal(result.name, testInstallment.name, res.text);
         done();
       });
   });
 
-  it('/DELETE method removes episode', done => {
+  it('/DELETE method removes installment', done => {
     request
-      .delete(`/api/episodes/${testEpisode._id}`)
+      .delete(`/api/installments/${testInstallment._id}`)
       .set('token',testToken)
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.statusCode, 200);
         assert.include(res.header['content-type'], 'application/json');
         let result = JSON.parse(res.text);
-        assert.deepEqual(result, testEpisode);
+        assert.deepEqual(result, testInstallment);
         done();
       });
   });
 
-  it('/GET on recently deleted episode returns no data', done => {
+  it('/GET on recently deleted installment returns no data', done => {
     request
-      .get(`/api/episodes/${testEpisode._id}`)
+      .get(`/api/installments/${testInstallment._id}`)
       .end((err, res) => {
         assert.equal(res.header['content-length'], 0);
         done();
@@ -168,7 +168,7 @@ describe('episode endpoints', () => {
         if (err) return done(err);
         assert.equal(res.statusCode, 200);
         assert.include(res.header['content-type'], 'application/json');
-        assert.include(res.text, 'GET /api/episodes');
+        assert.include(res.text, 'GET /api/installments');
         done();
       });
   });
@@ -186,8 +186,8 @@ describe('episode endpoints', () => {
   // cleanup
   after( done => {
     Promise.all([
-      request.delete(`/api/episodes/${testEpisode1._id}`).set('token',testToken),
-      request.delete(`/api/episodes/${testEpisode2._id}`).set('token',testToken)
+      request.delete(`/api/installments/${testInstallment1._id}`).set('token',testToken),
+      request.delete(`/api/installments/${testInstallment2._id}`).set('token',testToken)
     ])
     .then( () => done() )
     .catch(done);

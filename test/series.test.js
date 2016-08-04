@@ -12,10 +12,10 @@ describe('series endpoints', () => {
 
   const request = chai.request(app);
 
-  let testSeries = { name: 'test-series0', type: 'low' };
-  let testSeries1 = { name: 'test-series1', type: 'med' };
-  let testSeries2 = { name: 'test-series2', type: 'high' };
-  let testBadSeries = { name: '', type: 'what' };
+  let testSeries = { name: 'test-series0', genre: 'fantasy' };
+  let testSeries1 = { name: 'test-series1', genre: 'crime' };
+  let testSeries2 = { name: 'test-series2', genre: 'thriller' };
+  let testBadSeries = { name: '', genre: 'what' };
 
   before( done => {
     Promise.all([
@@ -67,7 +67,7 @@ describe('series endpoints', () => {
         assert.include(res.header['content-type'], 'application/json');
         let result = JSON.parse(res.text);
         assert.equal(result.name, testSeries2.name);
-        assert.equal(result.type, testSeries2.type);
+        assert.equal(result.genre, testSeries2.genre);
         testSeries2 = result;
         done();
       });
@@ -83,7 +83,7 @@ describe('series endpoints', () => {
         assert.equal(res.statusCode, 400);
         assert.include(res.header['content-type'], 'application/json');
         let result = JSON.parse(res.text);
-        assert.notEqual(result.type, testBadSeries.type);
+        assert.notEqual(result.genre, testBadSeries.genre);
         done();
       });
   });
