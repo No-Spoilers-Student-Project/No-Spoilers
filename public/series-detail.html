@@ -17,12 +17,12 @@
     <button class="delete" data-id="{{this._id}}">Delete This Series</button>
   </div>
   <div id="details-display"></div>
-  <div id="episode-list-template" style="display:none">
-    {{#each episodes}}
-      <h4>Episode Title: <span class="episode-title">{{this.title}}</span></h4>
+  <div id="installment-list-template" style="display:none">
+    {{#each installments}}
+      <h4>Installment Title: <span class="installment-title">{{this.title}}</span></h4>
     {{/each}}
   </div>
-  <div id="episode-list-display"></div>
+  <div id="installment-list-display"></div>
 </body>
 
 <script src="lib/jquery-3.1.0.min.js"></script>

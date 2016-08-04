@@ -22,19 +22,19 @@
     </ul>
   </div>
   <div id="series-list"></div>
-  <h3>Episode List <span id="new-episode-span"></span></h3>
-  <div id="episode-template" style="display:none">
+  <h3>Installment List <span id="new-installment-span"></span></h3>
+  <div id="installment-template" style="display:none">
     <ul>
       {{#each data}}
-        <li>Episode Title: <a href="/episode-detail.html?id={{this._id}}">{{this.title}} {{token}} </a>
+        <li>Installment Title: <a href="/installment-detail.html?id={{this._id}}">{{this.title}} {{token}} </a>
         {{#if ../token}}
-          <button class="delete" data-type="episodes" data-id="{{this._id}}">delete</button>
+          <button class="delete" data-type="installments" data-id="{{this._id}}">delete</button>
         {{/if}}
         </li>
       {{/each}}
     </ul>
   </div>
-  <div id="episode-list"></div>
+  <div id="installment-list"></div>
   <h3>Users</h3>
   <div id="userlist-template" style="display:none">
     <ul>
