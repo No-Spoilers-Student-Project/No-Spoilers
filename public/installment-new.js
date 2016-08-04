@@ -17,7 +17,7 @@ $('#installment-form button').on('click', event => {
   if($('#series_id').val()) data.series = $('#series_id').val();
   if($('#installment_medium').val()) data.medium = $('#installment_medium').val();
   if($('#installment_length').val()) data.length = $('#installment_length').val();
-  if($('#installment_airdate').val()) data.airdate = $('#installment_airdate').val();
+  if($('#installment_releaseDate').val()) data.airdate = $('#installment_releaseDate').val();
 
   if(!data.title) $('#notification-bar').text('Title Required');
   else {

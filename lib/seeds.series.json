@@ -1,8 +1,7 @@
 [
   {
-    "_id": "579f6ed16aec9a531448579c",
     "name": "Battlestar Galactica",
-    "type": "TV Show",
+    "genre": "Sci-Fi",
     "description": "Epic sci-fi series"
   }
 ]
