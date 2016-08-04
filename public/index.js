@@ -1,4 +1,5 @@
 'use strict';
+
 let seriesToHtml, installmentsToHtml;
 const loginUser = Cookies.get('username');
 const token = Cookies.get('token');
