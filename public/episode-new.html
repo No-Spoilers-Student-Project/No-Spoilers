@@ -1,0 +1,46 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>No Spoilers</title>
+</head>
+<body>
+  <header>
+    <div id="notification-bar"></div>
+  </header>
+  <h1>No Spoilers</h1>
+  <h2>Add New Installment</h2>
+  <p>
+    <form id="episode-form">
+      <div>
+        <label for="name">Title:</label>
+        <input name="name" type="text" id="episode_title" required />
+      </div>
+      <div>
+        <label for="series">Series:</label>
+        <select name="series" id="series_id"></select>
+      </div>
+      <div>
+        <label for="mediem">Medium:</label>
+        <input name="mediem" type="text" id="episode_medium" />
+      </div>
+      <div>
+        <label for="length">Length:</label>
+        <input name="length" type="number" id="episode_length" /> minutes/pages
+      </div>
+      <div>
+        <label for="date">First Air Date:</label>
+        <input name="date" type="date" id="episode_airdate"></textarea>
+      </div>
+      <div class="button">
+        <button type="submit">Add Episode</button>
+      </div>
+    </form>
+  </p>
+  <p id="results"></p>
+</body>
+
+<script src="lib/jquery-3.1.0.min.js"></script>
+<script src="lib/js.cookie.js"></script>
+<script src="episode-new.js"></script>
+
+</html>

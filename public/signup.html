@@ -1,0 +1,38 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>No Spoilers</title>
+</head>
+<body>
+  <header>
+    <div id="notification-bar"></div>
+  </header>
+  <h1>No Spoilers</h1>
+  <h2>Sign Up</h2>
+  <p>
+    <form id="signup-form">
+      <div>
+        <label for="name">Username:</label>
+        <input name="name" type="text" id="username" required />
+      </div>
+      <div>
+        <label for="pass">Password:</label>
+        <input name="pass" type="password" id="password" required />
+      </div>
+      <div>
+        <label for="conf">Confirm:</label>
+        <input name="conf" type="password" id="confirm" required />
+      </div>
+      <div class="button">
+        <button type="submit">Sign Up</button>
+      </div>
+    </form>
+  </p>
+  <p id="results"></p>
+</body>
+
+<script src="lib/jquery-3.1.0.min.js"></script>
+<script src="lib/js.cookie.js"></script>
+<script src="signup.js"></script>
+
+</html>

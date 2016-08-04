@@ -1,0 +1,30 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>No Spoilers</title>
+</head>
+<body>
+  <header>
+    <div id="notification-bar"></div>
+  </header>
+  <h1>No Spoilers</h1>
+  <h2>Episode Details</h2>
+  <div id="epsode-details-template" style="display:none">
+    <h3>Episode Title: <span id="episode-title">{{title}}</span></h3>
+    <p>Series: <a href="/series-detail.html?id={{series._id}}">{{series.name}}</a></p>
+    <p>Medium: {{medium}} </p>
+    <p>Length: {{length}} min</p>
+    <p>Airdate: {{airdate}} </p>
+    <a href="/"><button>Back to Main Page</button></a>
+    <button class="delete" data-id="{{this._id}}">Delete This Episode</button>
+  </div>
+  <div id="details-display"></div>
+</body>
+
+<script src="lib/jquery-3.1.0.min.js"></script>
+<script src="lib/url.min.js"></script>
+<script src="lib/handlebars.min-v4.0.5.js"></script>
+<script src="lib/js.cookie.js"></script>
+<script src="episode-detail.js"></script>
+
+</html>

@@ -1,0 +1,38 @@
+[
+    {
+        "_id": "579f70326aec9a531448579d",
+        "title": "Saga of a Star World",
+        "series": {
+            "_id": "579f6ed16aec9a531448579c",
+            "name": "Battlestar Galactica"
+        },
+        "airdate": "1978-09-17T00:00:00.000Z"
+    },
+    {
+        "_id": "579f81794bdcfbef1a22ef82",
+        "title": "Lost Planet of the Gods, Part I",
+        "series": {
+            "_id": "579f6ed16aec9a531448579c",
+            "name": "Battlestar Galactica"
+        },
+        "airdate": "1978-09-24T00:00:00.000Z"
+    },
+    {
+        "_id": "579face5386185312763b5c8",
+        "title": "Lost Planet of the Gods, Part II",
+        "series": {
+            "_id": "579f6ed16aec9a531448579c",
+            "name": "Battlestar Galactica"
+        },
+        "airdate": "1978-10-01T00:00:00.000Z"
+    },
+    {
+        "_id": "579fad57e4aeda7a27d7512c",
+        "title": "The Lost Warrior",
+        "series": {
+            "_id": "579f6ed16aec9a531448579c",
+            "name": "Battlestar Galactica"
+        },
+        "airdate": "1978-10-08T00:00:00.000Z"
+    }
+]
