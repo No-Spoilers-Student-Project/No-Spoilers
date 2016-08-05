@@ -26,7 +26,7 @@ $('body').on('click', '.delete', function() {
     headers: {'token': token},
     success: data => {
       window.location.href = '/';
-      $('#notification-bar').text('Deleted:' + data.title);
+      $('#notification-bar').text('Deleted:' + data.name);
     },
     error: () => $('#notification-bar').text('Error occurred deleting', selected)
   });

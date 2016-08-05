@@ -81,7 +81,7 @@ $('#user-list,#installment-list,#series-list').on('click', '.delete', function()
     headers: {'token': token},
     success: data => {
       selected.type === 'series' ? loadSeries() : selected.type === 'installments' ? loadInstallments() : loadUsers();
-      $('#notification-bar').text('Deleted: ' + (data.name || data.title || data.username));
+      $('#notification-bar').text('Deleted: ' + (data.name || data.username));
       setTimeout( () => $('#notification-bar').empty() , 10000);
     },
     error: () => $('#notification-bar').text('Error occurred deleting', selected)
