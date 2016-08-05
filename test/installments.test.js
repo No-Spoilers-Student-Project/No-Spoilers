@@ -30,7 +30,6 @@ describe('installment endpoints', () => {
       done();
     })
     .catch( err => {
-      console.log('before installment err:',err.response.text);
       done(err);
     });
   });

@@ -28,7 +28,6 @@ describe('user endpoints', () => {
       done();
     })
     .catch( err => {
-      console.log('before user err:',err);
       done(err);
     });
   });

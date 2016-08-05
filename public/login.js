@@ -20,8 +20,6 @@ $('#login-form button').on('click', event => {
   if(data.username && data.password) {
     $.post('/api/login', JSON.stringify(data))
     .done( function(result) {
-      console.log('result.token:', result.token);
-      console.log('result.username:', result.username);
       Cookies.set('token',result.token, { expires: 7 });
       Cookies.set('username',data.username, { expires: 7 });
       document.location.href = '/';
