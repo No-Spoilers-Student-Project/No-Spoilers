@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project attempts to adhere to [Semantic Versioning](http://semver.org/).
 No guarantees should be inferred.
 
+## [0.1.0] - 2016-08-04
+### Changes
+- Reset version numbers
+- Changed some schemas
+- Fixes to front end pages for new schemas
+
 ## [4.0.0] - 2016-08-04
 ### Changes
 - Changed name to No Spoilers

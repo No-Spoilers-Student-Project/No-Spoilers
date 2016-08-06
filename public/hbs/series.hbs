@@ -1,0 +1,16 @@
+<section>
+  <div id="series-details-template" style="display:none">
+    <h3>Series Name: <span id="series-name">{{name}}</span></h3>
+    <p>Type: {{type}} </p>
+    <p>Description: {{description}}</p>
+    <a href="/"><button>Back to Main Page</button></a>
+    <button class="delete" data-id="{{this._id}}">Delete This Series</button>
+  </div>
+  <div id="details-display"></div>
+  <div id="installment-list-template" style="display:none">
+    {{#each installments}}
+      <h4>Installment Title: <span class="installment-title">{{this.title}}</span></h4>
+    {{/each}}
+  </div>
+  <div id="installment-list-display"></div>
+</section>
