@@ -51,6 +51,7 @@ const usersToHtml = Handlebars.compile($('#userlist-template').html());
 
 function loadUsers() {
   $.ajax('/api/users', {
+    headers: {token},
     success: data => {
       const users = { data };
       users.token = token;
