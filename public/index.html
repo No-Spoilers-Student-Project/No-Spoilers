@@ -2,10 +2,30 @@
 <head>
   <meta charset="UTF-8">
   <title>No Spoilers</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./lib/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./lib/styles/skeleton.css">
+    <link rel="stylesheet" type="text/css" href="./styles/layout.css">
 </head>
 <body>
   <header>
     <div id="notification-bar"></div>
+
+    <!-- nav -->
+    <nav class="container">
+      <div class="row">
+        <div class="twelve columns">
+          <ul id="nav">
+            <li><a>Home</a></li>
+            <li><a id="signup">Sign Up!</a></li>
+            <li><a id="login">Login</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- /nav -->
+
   </header>
   <h1>No Spoilers</h1>
   <h2>Database Overview</h2>
@@ -22,7 +42,7 @@
     </ul>
   </div>
   <div id="series-list"></div>
-  <h3>Installment List <span id="new-installment-span"></span></h3>
+  <!--<h3>Installment List <span id="new-installment-span"></span></h3>
   <div id="installment-template" style="display:none">
     <ul>
       {{#each data}}
@@ -33,8 +53,8 @@
         </li>
       {{/each}}
     </ul>
-  </div>
-  <div id="installment-list"></div>
+  </div>-->
+  <!--<div id="installment-list"></div>
   <h3>Users</h3>
   <div id="userlist-template" style="display:none">
     <ul>
@@ -48,11 +68,48 @@
     </ul>
   </div>
   <div id="user-list">
-  </div>
+  </div> -->
   <div id="user-options"></div>
+  <form id="login-form">
+      <div>
+        <label for="name">Username:</label>
+        <input name="name" type="text" id="username" required />
+      </div>
+      <div>
+        <label for="pass">Password:</label>
+        <input name="pass" type="password" id="password" required />
+      </div>
+      <div class="button">
+        <button type="submit">Log In</button>
+      </div>
+    </form>
+
+    <form id="signup-form">
+      <div>
+        <label for="name">Username:</label>
+        <input name="name" type="text" id="signupUsername" required />
+      </div>
+      <div>
+        <label for="pass">Password:</label>
+        <input name="pass" type="password" id="signupPassword" required />
+      </div>
+      <div>
+        <label for="conf">Confirm:</label>
+        <input name="conf" type="password" id="confirm" required />
+      </div>
+      <div class="button">
+        <button type="submit">Sign Up</button>
+      </div>
+    </form>
+
+  <p id="results"></p>
 </body>
-  <script src="lib/jquery-3.1.0.min.js"></script>
-  <script src="lib/handlebars.min-v4.0.5.js"></script>
-  <script src="lib/js.cookie.js"></script>
+  <script src="lib/scripts/jquery-3.1.0.min.js"></script>
+  <script src="./lib/scripts/superagent.js"></script>
+  <script src="lib/scripts/handlebars.min-v4.0.5.js"></script>
+  <script src="lib/scripts/js.cookie.js"></script>
+  <script src="./scripts/login.js"></script>
+  <script src="./scripts/signup.js"></script>
   <script src="index.js"></script>
+  <script src="./scripts/series.js"></script>
 </html>
