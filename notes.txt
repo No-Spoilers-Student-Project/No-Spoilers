@@ -1,1 +1,10 @@
 user will have array of 'approvals', these will be approved installments that they would like to be able to view. when user selects a series and then a medium, those approved episodes will be shown to the user. approvals will be managed by the user on another page. user will select series and again medium, and then a list of all episodes that match those selectors will be shown (just a list). this list could be created and sorted based on release date, and could be displayed to the user through handlebars template that has checkbox, title and airdate. [another option could be to incorporate chapters/seasons, and episode numbers.] user could select the episode that they've seen up to, and all previous episodes would be automatically checked. when submitted, these installment refs would all be pushed to the user's approvals array.
+
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3YTNkYTBiYmRkOWY0MDIzZDY3MWU4MiIsImlhdCI6MTQ3MDM1NTk4MH0.tqFSnXkKjX8pXgibcsYZrGhyiMG52KAZUWiePL1DcFM
+
+change package.json before pushing
+
+user levels: not a user, can just get info about series, nothing more. moderator: maybe elected per series, moderator could have an array of series ids that they are moderator for to be checked against. moderators can edit all information pertaining to a series and any of its installments. user: can get and post, and modify installment summaries. admin can do it all.
+
+we should have markdown involved maybe? for the summaries of installments

@@ -7,7 +7,7 @@
     "pretest": "eslint **/*.js",
     "test": "NODE_ENV=test mocha -R nyan",
     "watch": "mocha -w",
-    "start": "NODE_ENV=production node index.js"
+    "start": "NODE_ENV=production nodemon index.js"
   },
   "repository": {
     "type": "git",

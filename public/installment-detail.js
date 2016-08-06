@@ -7,10 +7,10 @@ const token = Cookies.get('token');
 if(id) {
   $.ajax(`/api/installments/${id}`, {
     success: data => {
-      if(data.airdate) {
+      if(data.releaseDate) {
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        data.airdate = new Date(data.airdate).toLocaleDateString('en-US', options);
-      } 
+        data.releaseDate = new Date(data.releaseDate).toLocaleDateString('en-US', options);
+      }
       $('#details-display').append(installmentToHtml(data));
     },
     error: () => $('#notification-bar').text('Error occurred getting series list')
