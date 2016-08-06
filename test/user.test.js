@@ -1,3 +1,5 @@
+'use strict';
+
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const assert = chai.assert;
@@ -10,23 +12,30 @@ describe('user endpoints', () => {
 
   const request = chai.request(app);
 
+  let testRunner = { username: 'user-test-runner1', password: 'user-test-pass' };
+
   let testUser = { username: 'Apollo', password: 'Boxy' };
   let testUser1 = { username: 'Athena', password: 'Starbuck' };
   let testUser2 = { username: 'Starbuck', password: 'socialator' };
   let testBadUser = { username: '', password: 'frak' };
 
   before( done => {
-    Promise.all([
-      request.post('/api/users').send(testUser),
-      request.post('/api/users').send(testUser1)
-    ])
+    request.post('/api/signup').send(testRunner)
+    .then( result => {
+      const resultObj = JSON.parse(result.res.text);
+      testRunner.token = resultObj.token;
+      testRunner.id = resultObj.id;
+      return Promise.all([
+        request.post('/api/users').set('token',testRunner.token).send(testUser),
+        request.post('/api/users').set('token',testRunner.token).send(testUser1)
+      ]);
+    })
     .then( result => {
       testUser = JSON.parse(result[0].text);
       testUser1 = JSON.parse(result[1].text);
       done();
     })
     .catch( err => {
-      console.log('before user err:',err);
       done(err);
     });
   });
@@ -34,6 +43,7 @@ describe('user endpoints', () => {
   it('/GET on root route returns all', done => {
     request
       .get('/api/users')
+      .set('token',testRunner.token)
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.statusCode, 200);
@@ -47,6 +57,7 @@ describe('user endpoints', () => {
   it('/GET on user id returns user data', done => {
     request
       .get(`/api/users/${testUser1._id}`)
+      .set('token',testRunner.token)
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.statusCode, 200);
@@ -61,6 +72,7 @@ describe('user endpoints', () => {
     request
       .post('/api/users')
       .send(testUser2)
+      .set('token',testRunner.token)
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.statusCode, 200);
@@ -76,6 +88,7 @@ describe('user endpoints', () => {
   it('/POST validates title property', done => {
     request
       .post('/api/users')
+      .set('token',testRunner.token)
       .send(testBadUser)
       .end((err, res) => {
         if (!err) return done(res);
@@ -90,6 +103,7 @@ describe('user endpoints', () => {
   it('/POST method gives error with bad json in request', done => {
     request
       .post('/api/users')
+      .set('token',testRunner.token)
       .send('{"invalid"}')
       .end( (err,res) => {
         if(err) {
@@ -108,6 +122,7 @@ describe('user endpoints', () => {
     const putUrl = `/api/users/${testUser._id}`;
     request
       .put(putUrl)
+      .set('token',testRunner.token)
       .send(testUser)
       .end((err, res) => {
         if (err) return done(err);
@@ -122,6 +137,7 @@ describe('user endpoints', () => {
   it('/GET on recently updated user returns correct changes', done => {
     request
       .get(`/api/users/${testUser._id}`)
+      .set('token',testRunner.token)
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.statusCode, 200);
@@ -135,6 +151,7 @@ describe('user endpoints', () => {
   it('/DELETE method removes user', done => {
     request
       .delete(`/api/users/${testUser._id}`)
+      .set('token',testRunner.token)
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.statusCode, 200);
@@ -148,6 +165,7 @@ describe('user endpoints', () => {
   it('/GET on recently deleted user returns no data', done => {
     request
       .get(`/api/users/${testUser._id}`)
+      .set('token',testRunner.token)
       .end((err, res) => {
         assert.equal(res.header['content-length'], 0);
         done();
@@ -169,6 +187,7 @@ describe('user endpoints', () => {
   it('returns 404 for bad path', done => {
     request
       .get('/badpath')
+      .set('token',testRunner.token)
       .end((err, res) => {
         assert.ok(err);
         assert.equal(res.statusCode, 404);
@@ -178,10 +197,13 @@ describe('user endpoints', () => {
 
   // cleanup
   after( done => {
-    Promise.all([
-      request.delete(`/api/users/${testUser1._id}`),
-      request.delete(`/api/users/${testUser2._id}`)
+    return Promise.all([
+      request.delete(`/api/users/${testUser1._id}`).set('token',testRunner.token),
+      request.delete(`/api/users/${testUser2._id}`).set('token',testRunner.token)
     ])
+    .then( () => {
+      return request.delete(`/api/users/${testRunner.id}`).set('token',testRunner.token);
+    })
     .then( () => done() )
     .catch(done);
   });

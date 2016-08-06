@@ -1,3 +1,5 @@
+'use strict';
+
 const token = Cookies.get('token');
 
 $.getJSON('/api/series', function(result) {
@@ -11,13 +13,13 @@ $('#installment-form button').on('click', event => {
   event.preventDefault();
   
   const data = {};
-  if($('#installment_title').val()) data.title = $('#installment_title').val();
+  if($('#installment_name').val()) data.name = $('#installment_name').val();
   if($('#series_id').val()) data.series = $('#series_id').val();
   if($('#installment_medium').val()) data.medium = $('#installment_medium').val();
   if($('#installment_length').val()) data.length = $('#installment_length').val();
-  if($('#installment_airdate').val()) data.airdate = $('#installment_airdate').val();
+  if($('#installment_releaseDate').val()) data.airdate = $('#installment_releaseDate').val();
 
-  if(!data.title) $('#notification-bar').text('Title Required');
+  if(!data.name) $('#notification-bar').text('Installment Title Required');
   else {
     $.ajax({
       url: '/api/installments',
@@ -27,6 +29,9 @@ $('#installment-form button').on('click', event => {
     })  
     .done( function(result) {
       window.location.href = 'installment-detail.html?id=' + result._id;
+    })
+    .fail( function(err) {
+      console.log('Error: ' + err.status + ' ' + err.statusText + ' - ' + err.responseText);
     });
   }
 });

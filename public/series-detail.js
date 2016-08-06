@@ -1,3 +1,5 @@
+'use strict';
+
 const seriesToHtml = Handlebars.compile($('#series-details-template').html());
 const installmentsToHtml = Handlebars.compile($('#installment-list-template').html());
 const id = url('?id');
@@ -6,7 +8,6 @@ const token = Cookies.get('token');
 if(id) {
   $.ajax(`/api/series/${id}`, {
     success: data => {
-      console.log('data:',data);
       $('#details-display').append(seriesToHtml(data));
       $('#details-display').append(installmentsToHtml(data));
     },

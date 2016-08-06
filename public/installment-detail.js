@@ -1,3 +1,5 @@
+'use strict';
+
 const installmentToHtml = Handlebars.compile($('#epsode-details-template').html());
 const id = url('?id');
 const token = Cookies.get('token');
@@ -5,9 +7,9 @@ const token = Cookies.get('token');
 if(id) {
   $.ajax(`/api/installments/${id}`, {
     success: data => {
-      if(data.airdate) {
+      if(data.releaseDate) {
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        data.airdate = new Date(data.airdate).toLocaleDateString('en-US', options);
+        data.releaseDate = new Date(data.releaseDate).toLocaleDateString('en-US', options);
       } 
       $('#details-display').append(installmentToHtml(data));
     },
@@ -24,7 +26,7 @@ $('body').on('click', '.delete', function() {
     headers: {'token': token},
     success: data => {
       window.location.href = '/';
-      $('#notification-bar').text('Deleted:' + data.title);
+      $('#notification-bar').text('Deleted:' + data.name);
     },
     error: () => $('#notification-bar').text('Error occurred deleting', selected)
   });

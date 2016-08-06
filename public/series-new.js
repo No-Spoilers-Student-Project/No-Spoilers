@@ -1,3 +1,5 @@
+'use strict';
+
 const token = Cookies.get('token');
 
 $('#series-form button').on('click', event => {
@@ -5,7 +7,7 @@ $('#series-form button').on('click', event => {
   
   const data = {
     name: $('#series_name').val(),
-    type: $('#series_type').val(),
+    genre: $('#series_genre').val(),
     description: $('#series_description').val()
   };
 

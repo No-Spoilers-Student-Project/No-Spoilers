@@ -1,5 +1,7 @@
 'use strict';
+
 let seriesToHtml;//, installmentsToHtml;
+
 const loginUser = Cookies.get('username');
 const token = Cookies.get('token');
 
@@ -59,6 +61,7 @@ loadSeries();
 //     error: () => $('#notification-bar').text('Error occurred getting user list')
 //   });
 // }
+
 
 // loadUsers();
 

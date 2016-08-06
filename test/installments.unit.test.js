@@ -1,3 +1,5 @@
+'use strict';
+
 const chai = require('chai');
 const assert = chai.assert;
 const Installment = require('../lib/models/installment');
