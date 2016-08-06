@@ -7,23 +7,27 @@ const app = require('../lib/app');
 require( '../lib/mongoose-setup' );
 
 chai.use(chaiHttp);
-
-const testToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3YTNjMjlmNzZhYWM0MjFmMzQ5NzE1NCIsImlhdCI6MTQ3MDM0OTk4M30.EBAWwr_DFKR1UYHk4l1yiAEtnPDfgiIzg7_U90H13qY';
+const request = chai.request(app);
 
 describe('installment endpoints', () => {
 
-  const request = chai.request(app);
-
+  let testUser = {username: 'test-user', password: 'test-pass'};
   let testInstallment = { name: 'test-installment2', length: 42 };
   let testInstallment1 = { name: 'test-installment3', length: 43 };
   let testInstallment2 = { name: 'test-installment4', length: 44 };
   let testBadInstallment = { name: '', length: 45 };
 
   before( done => {
-    Promise.all([
-      request.post('/api/installments').set('token',testToken).send(testInstallment),
-      request.post('/api/installments').set('token',testToken).send(testInstallment1)
-    ])
+    request.post('/api/signup').send(testUser)
+    .then( result => {
+      const resultObj = JSON.parse(result.res.text);
+      testUser.token = resultObj.token;
+      testUser.id = resultObj.id;
+      return Promise.all([
+        request.post('/api/installments').set('token',testUser.token).send(testInstallment),
+        request.post('/api/installments').set('token',testUser.token).send(testInstallment1)
+      ]);
+    })
     .then( result => {
       testInstallment = JSON.parse(result[0].text);
       testInstallment1 = JSON.parse(result[1].text);
@@ -63,7 +67,7 @@ describe('installment endpoints', () => {
   it('/POST method completes successfully', done => {
     request
       .post('/api/installments')
-      .set('token',testToken)
+      .set('token',testUser.token)
       .send(testInstallment2)
       .end((err, res) => {
         if (err) return done(err);
@@ -80,7 +84,7 @@ describe('installment endpoints', () => {
   it('/POST validates title property', done => {
     request
       .post('/api/installments')
-      .set('token',testToken)
+      .set('token',testUser.token)
       .send(testBadInstallment)
       .end((err, res) => {
         if (!err) return done(res);
@@ -95,7 +99,7 @@ describe('installment endpoints', () => {
   it('/POST method gives error with bad json in request', done => {
     request
       .post('/api/installments')
-      .set('token',testToken)
+      .set('token',testUser.token)
       .send('{"invalid"}')
       .end( (err,res) => {
         if(err) {
@@ -114,7 +118,7 @@ describe('installment endpoints', () => {
     const putUrl = `/api/installments/${testInstallment._id}`;
     request
       .put(putUrl)
-      .set('token',testToken)
+      .set('token',testUser.token)
       .send(testInstallment)
       .end((err, res) => {
         if (err) return done(err);
@@ -142,7 +146,7 @@ describe('installment endpoints', () => {
   it('/DELETE method removes installment', done => {
     request
       .delete(`/api/installments/${testInstallment._id}`)
-      .set('token',testToken)
+      .set('token',testUser.token)
       .end((err, res) => {
         if (err) return done(err);
         assert.equal(res.statusCode, 200);
@@ -186,10 +190,13 @@ describe('installment endpoints', () => {
 
   // cleanup
   after( done => {
-    Promise.all([
-      request.delete(`/api/installments/${testInstallment1._id}`).set('token',testToken),
-      request.delete(`/api/installments/${testInstallment2._id}`).set('token',testToken)
+    return Promise.all([
+      request.delete(`/api/installments/${testInstallment1._id}`).set('token',testUser.token),
+      request.delete(`/api/installments/${testInstallment2._id}`).set('token',testUser.token)
     ])
+    .then( () => {
+      return request.delete(`/api/users/${testUser.id}`).set('token',testUser.token);
+    })
     .then( () => done() )
     .catch(done);
   });
