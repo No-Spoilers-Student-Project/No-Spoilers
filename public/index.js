@@ -1,12 +1,13 @@
 'use strict';
 
-let seriesToHtml, installmentsToHtml;
+let seriesToHtml;//, installmentsToHtml;
+
 const loginUser = Cookies.get('username');
 const token = Cookies.get('token');
 
 if(token) {
   $('#new-series-span').html('<a href="series-new.html"><button>New</button></a>');
-  $('#new-installment-span').html('<a href="installment-new.html"><button>New</button></a>');
+  // $('#new-installment-span').html('<a href="installment-new.html"><button>New</button></a>');
   //$('#new-user-span').html('<a href="series-new.html"><button>New</button></a>');
 }
 
@@ -17,7 +18,7 @@ Handlebars.registerHelper('if', function(conditional, options) {
 });
 
 seriesToHtml = Handlebars.compile($('#series-template').html());
-installmentsToHtml = Handlebars.compile($('#installment-template').html()); 
+// installmentsToHtml = Handlebars.compile($('#installment-template').html()); 
 
 function loadSeries() {
   $.ajax('/api/series', {
@@ -33,36 +34,36 @@ function loadSeries() {
 
 loadSeries();
 
-function loadInstallments() {
-  $.ajax('/api/installments', {
-    success: data => {
-      const installment = { data };
-      installment.token = token;
-      const html = installmentsToHtml(installment);
-      $('#installment-list').empty().append(html);
-    },
-    error: () => $('#notification-bar').text('Error occurred getting installment list')
-  });
-}
+// function loadInstallments() {
+//   $.ajax('/api/installments', {
+//     success: data => {
+//       const installment = { data };
+//       installment.token = token;
+//       const html = installmentsToHtml(installment);
+//       $('#installment-list').empty().append(html);
+//     },
+//     error: () => $('#notification-bar').text('Error occurred getting installment list')
+//   });
+// }
 
-loadInstallments();
+// loadInstallments();
 
-const usersToHtml = Handlebars.compile($('#userlist-template').html());
+// const usersToHtml = Handlebars.compile($('#userlist-template').html());
 
-function loadUsers() {
-  $.ajax('/api/users', {
-    headers: {token},
-    success: data => {
-      const users = { data };
-      users.token = token;
-      const html = usersToHtml(users);
-      $('#user-list').empty().append(html);
-    },
-    error: () => $('#notification-bar').text('Error occurred getting user list')
-  });
-}
+// function loadUsers() {
+//   $.ajax('/api/users', {
+//     success: data => {
+//       const users = { data };
+//       users.token = token;
+//       const html = usersToHtml(users);
+//       $('#user-list').empty().append(html);
+//     },
+//     error: () => $('#notification-bar').text('Error occurred getting user list')
+//   });
+// }
 
-loadUsers();
+
+// loadUsers();
 
 function userOptions() {
   if(token) {
@@ -75,19 +76,19 @@ function userOptions() {
 
 userOptions();
 
-$('#user-list,#installment-list,#series-list').on('click', '.delete', function() {
-  const selected = $(this).data();
-  $.ajax(`/api/${selected.type}/${selected.id}`, {
-    type: 'DELETE',
-    headers: {'token': token},
-    success: data => {
-      selected.type === 'series' ? loadSeries() : selected.type === 'installments' ? loadInstallments() : loadUsers();
-      $('#notification-bar').text('Deleted: ' + (data.name || data.username));
-      setTimeout( () => $('#notification-bar').empty() , 10000);
-    },
-    error: () => $('#notification-bar').text('Error occurred deleting', selected)
-  });
-});
+// $('#user-list,#installment-list,#series-list').on('click', '.delete', function() {
+//   const selected = $(this).data();
+//   $.ajax(`/api/${selected.type}/${selected.id}`, {
+//     type: 'DELETE',
+//     headers: {'token': token},
+//     success: data => {
+//       selected.type === 'series' ? loadSeries() : selected.type === 'installments' ? loadInstallments() : loadUsers();
+//       $('#notification-bar').text('Deleted: ' + (data.name || data.title || data.username));
+//       setTimeout( () => $('#notification-bar').empty() , 10000);
+//     },
+//     error: () => $('#notification-bar').text('Error occurred deleting', selected)
+//   });
+// });
 
 $('#logout').on('click', function() {
   Cookies.remove('token');
