@@ -69,7 +69,7 @@ function userOptions() {
   if(token) {
     $('#user-options').html(`<p>Current User: ${loginUser} <button id="logout">Log Out</button></p>`);
   } else {
-    $('#user-options').html('<a href="login.html"><button>Log In</button></a> <a href="signup.html"><button>Sign Up</button></a>');
+    $('#user-options').html('<button id="login-button">Log In</button> <button id="signup-button">Sign Up</button>');
   }
   
 }
@@ -94,4 +94,18 @@ $('#logout').on('click', function() {
   Cookies.remove('token');
   Cookies.remove('username');
   document.location.reload(true);
+});
+
+$('#signup-link,#signup-button').on('click', function(event) {
+  event.preventDefault();
+  $('#signup-form').show();
+  $('#login-form').hide();
+  $('#user-options').hide();
+});
+
+$('#login-link,#login-button').on('click', function(event) {
+  event.preventDefault();
+  $('#signup-form').hide();
+  $('#login-form').show();
+  $('#user-options').hide();
 });
