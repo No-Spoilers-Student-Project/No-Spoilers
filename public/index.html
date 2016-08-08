@@ -9,100 +9,106 @@
 </head>
 <body>
   <header>
-    <div id="notification-bar"></div>
 
     <!-- nav -->
     <nav class="container">
       <div class="row">
         <div class="twelve columns">
-          <ul id="nav">
+          <ul id="nav-buttons">
             <li><a>Home</a></li>
-            <li><a id="signup">Sign Up!</a></li>
-            <li><a id="login">Login</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="" id="signup-link">Sign Up!</a></li>
+            <li><a href="" id="login-link">Login</a></li>
+            <li><a id="about-button">About</a></li>
           </ul>
         </div>
       </div>
     </nav>
     <!-- /nav -->
 
+    <div id="notification-bar"></div>
+    
   </header>
-  <h1>No Spoilers</h1>
-  <h2>Database Overview</h2>
-  <h3>Series List <span id="new-series-span"></span></h3>
-  <div id="series-template" style="display:none">
-    <ul>
-      {{#each data}}
-        <li>Series Name: <a href="/series-detail.html?id={{this._id}}">{{this.name}}</a>
-        {{#if ../token}}
-          <button class="delete" data-type="series" data-id="{{this._id}}">delete</button>
-        {{/if}}
-        </li>
-      {{/each}}
-    </ul>
-  </div>
-  <div id="series-list"></div>
-  <!--<h3>Installment List <span id="new-installment-span"></span></h3>
-  <div id="installment-template" style="display:none">
-    <ul>
-      {{#each data}}
-        <li>Installment Title: <a href="/installment-detail.html?id={{this._id}}">{{this.name}}</a>
-        {{#if ../token}}
-          <button class="delete" data-type="installments" data-id="{{this._id}}">delete</button>
-        {{/if}}
-        </li>
-      {{/each}}
-    </ul>
-  </div>-->
-  <!--<div id="installment-list"></div>
-  <h3>Users</h3>
-  <div id="userlist-template" style="display:none">
-    <ul>
-      {{#each data}}
-        <li>Username: <a href="/user-detail.html?id={{this._id}}">{{this.username}}</a>
-        {{#if ../token}}
-          <button class="delete" data-type="users" data-id="{{this._id}}">delete</button>
-        {{/if}}
-        </li>
-      {{/each}}
-    </ul>
-  </div>
-  <div id="user-list">
-  </div> -->
-  <div id="user-options"></div>
-  <form id="login-form">
-      <div>
-        <label for="name">Username:</label>
-        <input name="name" type="text" id="username" required />
-      </div>
-      <div>
-        <label for="pass">Password:</label>
-        <input name="pass" type="password" id="password" required />
-      </div>
-      <div class="button">
-        <button type="submit">Log In</button>
-      </div>
-    </form>
+  <main>
+    <h1>No Spoilers</h1>
+    <h2>Database Overview</h2>
+    <h4>Currently Active Series: <span id="new-series-span"></span></h4>
+    <div id="series-template" style="display:none">
+      <ul>
+        {{#each data}}
+          <li>Series Name: <a href="/series-detail.html?id={{this._id}}">{{this.name}}</a>
+          {{#if ../token}}
+            <button class="delete" data-type="series" data-id="{{this._id}}">delete</button>
+          {{/if}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+    <div id="series-list"></div>
+    <!--<h3>Installment List <span id="new-installment-span"></span></h3>
+    <div id="installment-template" style="display:none">
+      <ul>
+        {{#each data}}
+          <li>Installment Title: <a href="/installment-detail.html?id={{this._id}}">{{this.name}}</a>
+          {{#if ../token}}
+            <button class="delete" data-type="installments" data-id="{{this._id}}">delete</button>
+          {{/if}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>-->
+    <!--<div id="installment-list"></div>
+    <h3>Users</h3>
+    <div id="userlist-template" style="display:none">
+      <ul>
+        {{#each data}}
+          <li>Username: <a href="/user-detail.html?id={{this._id}}">{{this.username}}</a>
+          {{#if ../token}}
+            <button class="delete" data-type="users" data-id="{{this._id}}">delete</button>
+          {{/if}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+    <div id="user-list">
+    </div> -->
+    <div id="user-options"></div>
+    <form id="login-form">
+        <div>
+          <label for="name">Username:</label>
+          <input name="name" type="text" id="username" required />
+        </div>
+        <div>
+          <label for="pass">Password:</label>
+          <input name="pass" type="password" id="password" required />
+        </div>
+        <div class="button">
+          <button type="submit">Log In</button>
+        </div>
+      </form>
 
-    <form id="signup-form">
-      <div>
-        <label for="name">Username:</label>
-        <input name="name" type="text" id="signupUsername" required />
-      </div>
-      <div>
-        <label for="pass">Password:</label>
-        <input name="pass" type="password" id="signupPassword" required />
-      </div>
-      <div>
-        <label for="conf">Confirm:</label>
-        <input name="conf" type="password" id="confirm" required />
-      </div>
-      <div class="button">
-        <button type="submit">Sign Up</button>
-      </div>
-    </form>
+      <form id="signup-form">
+        <div>
+          <label for="name">Username:</label>
+          <input name="name" type="text" id="signupUsername" required />
+        </div>
+        <div>
+          <label for="pass">Password:</label>
+          <input name="pass" type="password" id="signupPassword" required />
+        </div>
+        <div>
+          <label for="conf">Confirm:</label>
+          <input name="conf" type="password" id="confirm" required />
+        </div>
+        <div class="button">
+          <button type="submit">Sign Up</button>
+        </div>
+      </form>
 
-  <p id="results"></p>
+    <!--<p id="results"></p>-->
+  </main>
+  <footer>
+    <p>&copy; No Spoilers - Geoffrey Emerson, Arielle Foldoe, Aaron Bini - <a href="https://github.com/No-Spoilers/No-Spoilers">Github Page</a></p>
+  </footer>
 </body>
   <script src="lib/scripts/jquery-3.1.0.min.js"></script>
   <script src="./lib/scripts/superagent.js"></script>

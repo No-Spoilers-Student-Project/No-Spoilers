@@ -31,9 +31,10 @@
     if(data.password != data.confirm) {
       $('#notification-bar').text('Password and Confirmation must match');
     } else {
+      console.log('data sending to /api/signup:',JSON.stringify(data));
       superagent
         .post('/api/signup')
-        .send(data)
+        .send(JSON.stringify(data))
         .then(result => {
           let token = JSON.parse(result.text);
           console.log(token);
