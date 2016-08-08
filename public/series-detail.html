@@ -20,6 +20,8 @@
   <div id="installment-list-template" style="display:none">
     {{#each installments}}
       <h4>Installment Title: <span class="installment-title">{{this.name}}</span></h4>
+      <p>Release Date: <span>{{this.releaseDate}}</span></p>
+      <label for="seen-it">I've seen this episode</label><input name="seen-it" type="checkbox">
     {{/each}}
   </div>
   <div id="installment-list-display"></div>
