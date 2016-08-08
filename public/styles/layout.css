@@ -1,3 +1,8 @@
+body {
+  height: 100%; /* needed for firefox*/
+  background-color: black;
+}
+
 header {
   background-color: #eee;
   width: 100%;
@@ -25,8 +30,29 @@ nav li {
 main {
   width:75%;
   margin:auto;
+
+  /* Sticky footer settings */
+  overflow: auto;
+  padding-bottom: 4rem;
+}
+
+#above-footer-container {
+  min-height: 100%;
   height: auto;
-  min-height: 100%; 
+  background-color: white;
+}
+
+footer {
+  clear: both;
+  background-color: black;
+  color: white;
+  text-align: center;
+  /*padding: 1rem;*/
+  position: relative;
+  height: 3rem;
+  margin-top: -3rem;
+  /*padding-top: 1rem;*/
+  box-shadow: 0 100px 0 100px black;
 }
 
 h1,h2 {
@@ -35,17 +61,6 @@ h1,h2 {
 
 h1 {
   margin-top: 3rem;
-}
-
-footer {
-  background-color: black;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-}
-
-footer p {
-  margin-top: 2rem;
 }
 
 a {
