@@ -66,3 +66,20 @@ h1 {
 a {
   text-decoration: none;
 }
+
+/* Add new series page */
+
+.series-option {
+  width: 758px;
+  margin: 5rem auto;
+  border: 2px solid black;
+  background-color: #77f;
+}
+
+.inner-series-option {
+  margin: 2rem;
+}
+
+.inner-series-option p {
+  font-size: 2rem;
+}

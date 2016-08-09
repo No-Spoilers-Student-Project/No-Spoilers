@@ -2,37 +2,64 @@
 <head>
   <meta charset="UTF-8">
   <title>No Spoilers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="./lib/styles/normalize.css">
+  <link rel="stylesheet" type="text/css" href="./lib/styles/skeleton.css">
+  <link rel="stylesheet" type="text/css" href="./styles/layout.css">
 </head>
 <body>
-  <header>
-    <div id="notification-bar"></div>
-  </header>
-  <h1>No Spoilers</h1>
-  <h2>Add New Series</h2>
-  <p>
-    <form id="series-form">
-      <div>
-        <label for="name">Name:</label>
-        <input name="name" type="text" id="series_name" required />
+  <div id="above-footer-container">
+
+    <header>
+      <div id="notification-bar"></div>
+    </header>
+
+    <main>
+      <h1>No Spoilers</h1>
+      <h2>Add New Series</h2>
+      <p>
+        <form id="series-form">
+          <div>
+            <label for="name">Search by Name:</label>
+            <input name="name" type="text" id="series_name" required />
+          </div>
+          <!--<div>
+            <label for="genre">Genre:</label>
+            <input name="genre" type="text" id="series_genre" />
+          </div>
+          <div>
+            <label for="desc">Description:</label>
+            <textarea name="desc" type="text" id="series_description"></textarea>
+          </div>-->
+          <button type="submit">Add Series</button>
+        </form>
+      </p>
+      <div id="result-template" style="display:none;">
+        <h3>Import From TVDB:</h3>
+          {{#each data}}
+            <div class="series-option" data-seriesid="{{this.seriesid}}">
+              <img src="http://thetvdb.com/banners/{{this.banner}}" alt="{{this.SeriesName}} Banner" />
+              <div class="inner-series-option">
+                <p>Series Name: <span class="">{{this.SeriesName}}</span></p>
+                <p>Network: <span class="">{{this.Network}}</span></p>
+                <p>First Aired: <span class="">{{this.FirstAired}}</span></p>
+                <p>Overview: <span class="">{{this.Overview}}</span></p>
+              </div>
+            </div>
+          {{/each}}
+        </ul>
       </div>
-      <div>
-        <label for="genre">Genre:</label>
-        <input name="genre" type="text" id="series_genre" />
-      </div>
-      <div>
-        <label for="desc">Description:</label>
-        <textarea name="desc" type="text" id="series_description"></textarea>
-      </div>
-      <div class="button">
-        <button type="submit">Add Series</button>
-      </div>
-    </form>
-  </p>
-  <p id="results"></p>
+      <div id="results"></div>
+    </main>
+  </div>
+  <footer>
+    &copy; No Spoilers - Geoffrey Emerson, Arielle Foldoe, Aaron Bini - <a href="https://github.com/No-Spoilers/No-Spoilers">Github Page</a>
+  </footer>
 </body>
 
-<script src="lib/jquery-3.1.0.min.js"></script>
-<script src="lib/js.cookie.js"></script>
+<script src="lib/scripts/jquery-3.1.0.min.js"></script>
+<script src="lib/scripts/handlebars.min-v4.0.5.js"></script>
+<script src="lib/scripts/js.cookie.js"></script>
 <script src="series-new.js"></script>
 
 </html>

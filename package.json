@@ -30,6 +30,7 @@
     "express": "^4.14.0",
     "jsonwebtoken": "^7.1.7",
     "mongoose": "^4.5.7",
+    "node-tvdb": "^2.0.10",
     "nodemon": "^1.10.0",
     "superagent": "^2.1.0"
   }
