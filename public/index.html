@@ -26,24 +26,26 @@
     <!-- /nav -->
 
     <div id="notification-bar"></div>
-    
+
   </header>
   <main>
-    <h1>No Spoilers</h1>
-    <h2>Database Overview</h2>
-    <h4>Currently Active Series: <span id="new-series-span"></span></h4>
-    <div id="series-template" style="display:none">
-      <ul>
-        {{#each data}}
-          <li>Series Name: <a href="/series-detail.html?id={{this._id}}">{{this.name}}</a>
-          {{#if ../token}}
-            <button class="delete" data-type="series" data-id="{{this._id}}">delete</button>
-          {{/if}}
-          </li>
-        {{/each}}
-      </ul>
+    <div id="landing-page">
+      <h1>No Spoilers</h1>
+      <h2>Database Overview</h2>
+      <h4>Currently Active Series: <span id="new-series-span"></span></h4>
+      <div id="series-template" style="display:none">
+        <ul>
+          {{#each data}}
+            <li>Series Name: <a href="/series-detail.html?id={{this._id}}">{{this.name}}</a>
+            {{#if ../token}}
+              <button class="delete" data-type="series" data-id="{{this._id}}">delete</button>
+            {{/if}}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+      <div id="series-list"></div>
     </div>
-    <div id="series-list"></div>
     <!--<h3>Installment List <span id="new-installment-span"></span></h3>
     <div id="installment-template" style="display:none">
       <ul>
@@ -111,9 +113,11 @@
   </footer>
 </body>
   <script src="lib/scripts/jquery-3.1.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
   <script src="./lib/scripts/superagent.js"></script>
   <script src="lib/scripts/handlebars.min-v4.0.5.js"></script>
   <script src="lib/scripts/js.cookie.js"></script>
+  <script src="./scripts/template.js"></script>
   <script src="./scripts/login.js"></script>
   <script src="./scripts/signup.js"></script>
   <script src="index.js"></script>
