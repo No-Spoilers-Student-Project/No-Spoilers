@@ -4,9 +4,9 @@
 
   const user = {};
 
-  let seriesToHtml;//, installmentsToHtml;
-
-  const loginUser = Cookies.get('username');
+  // let seriesToHtml;//, installmentsToHtml;
+  //
+  // const loginUser = Cookies.get('username');
   const token = Cookies.get('token');
 
   if(token) {
