@@ -1,6 +1,6 @@
 'use strict';
 
-const token = Cookies.get('token');
+//const token = Cookies.get('token');
 
 $('#series-form').on('submit', event => {
   event.preventDefault();
@@ -15,11 +15,9 @@ $('#series-form').on('submit', event => {
   if(!data.name) $('#notification-bar').text('Name Required');
   else {
     $.ajax({
-      url: '/api/series',
-      type: 'POST',
-      headers: { 'token': token },
+      url: '/api/series/search/' + data.name,
+      type: 'GET'
       // contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(data)
       // dataType: 'json'
     })  
     // $.post('/api/series', JSON.stringify(data))
