@@ -8,22 +8,23 @@
     <link rel="stylesheet" type="text/css" href="./styles/layout.css">
 </head>
 <body>
-  <header>
+  <div id="above-footer-container">
+    <header>
 
-    <!-- nav -->
-    <nav class="container">
-      <div class="row">
-        <div class="twelve columns">
-          <ul id="nav-buttons">
-            <li><a>Home</a></li>
-            <li><a href="" id="signup-link">Sign Up!</a></li>
-            <li><a href="" id="login-link">Login</a></li>
-            <li><a id="about-button">About</a></li>
-          </ul>
+      <!-- nav -->
+      <nav class="container">
+        <div class="row">
+          <div class="twelve columns">
+            <ul id="nav-buttons">
+              <li><a>Home</a></li>
+              <li><a href="" id="signup-link">Sign Up!</a></li>
+              <li><a href="" id="login-link">Login</a></li>
+              <li><a id="about-button">About</a></li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
-    <!-- /nav -->
+      </nav>
+      <!-- /nav -->
 
     <div id="notification-bar"></div>
 
@@ -88,28 +89,29 @@
         </div>
       </form>
 
-      <form id="signup-form">
-        <div>
-          <label for="name">Username:</label>
-          <input name="name" type="text" id="signupUsername" required />
-        </div>
-        <div>
-          <label for="pass">Password:</label>
-          <input name="pass" type="password" id="signupPassword" required />
-        </div>
-        <div>
-          <label for="conf">Confirm:</label>
-          <input name="conf" type="password" id="confirm" required />
-        </div>
-        <div class="button">
-          <button type="submit">Sign Up</button>
-        </div>
-      </form>
+        <form id="signup-form">
+          <div>
+            <label for="name">Username:</label>
+            <input name="name" type="text" id="signupUsername" required />
+          </div>
+          <div>
+            <label for="pass">Password:</label>
+            <input name="pass" type="password" id="signupPassword" required />
+          </div>
+          <div>
+            <label for="conf">Confirm:</label>
+            <input name="conf" type="password" id="confirm" required />
+          </div>
+          <div class="button">
+            <button type="submit">Sign Up</button>
+          </div>
+        </form>
 
-    <!--<p id="results"></p>-->
-  </main>
+      <!--<p id="results"></p>-->
+    </main>
+  </div>
   <footer>
-    <p>&copy; No Spoilers - Geoffrey Emerson, Arielle Foldoe, Aaron Bini - <a href="https://github.com/No-Spoilers/No-Spoilers">Github Page</a></p>
+    &copy; No Spoilers - Geoffrey Emerson, Arielle Foldoe, Aaron Bini - <a href="https://github.com/No-Spoilers/No-Spoilers">Github Page</a>
   </footer>
 </body>
   <script src="lib/scripts/jquery-3.1.0.min.js"></script>
