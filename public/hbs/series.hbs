@@ -1,16 +1,18 @@
 <section>
-  <div id="series-details-template" style="display:none">
-    <h3>Series Name: <span id="series-name">{{name}}</span></h3>
-    <p>Type: {{type}} </p>
+  <div class="series-details-template">
+    <h3>Series Name: <span class="series-name"><a href="/api/installments/{{this._id}}">{{name}}</a></span></h3>
+    <p>Genre: {{genre}} </p>
     <p>Description: {{description}}</p>
-    <a href="/"><button>Back to Main Page</button></a>
-    <button class="delete" data-id="{{this._id}}">Delete This Series</button>
+    <!-- <a href="/"><button>Back to Main Page</button></a> -->
+    <!-- <button class="delete" data-id="{{this._id}}">Delete This Series</button> -->
   </div>
-  <div id="details-display"></div>
-  <div id="installment-list-template" style="display:none">
-    {{#each installments}}
-      <h4>Installment Title: <span class="installment-title">{{this.title}}</span></h4>
-    {{/each}}
+
+  <div class="installment-list-template">
+    <p>Installment Count: {{this.installmentCount}}</p>
+    <button id="{{this._id}}" class="installments-brief active" data-id="{{this._id}}">View Installments</button>
+    <div id="details-{{this._id}}" class="details-display"></div>
+    <!-- {{#each installments}}
+      <h4>Installment Title: <span class="installment-title">{{this.name}}</span></h4>
+    {{/each}} -->
   </div>
-  <div id="installment-list-display"></div>
 </section>
