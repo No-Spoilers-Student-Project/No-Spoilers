@@ -26,10 +26,11 @@
       </nav>
       <!-- /nav -->
 
-      <div id="notification-bar"></div>
-      
-    </header>
-    <main>
+    <div id="notification-bar"></div>
+
+  </header>
+  <main>
+    <div id="landing-page">
       <h1>No Spoilers</h1>
       <h2>Database Overview</h2>
       <h4>Currently Active Series: <span id="new-series-span"></span></h4>
@@ -45,47 +46,48 @@
         </ul>
       </div>
       <div id="series-list"></div>
-      <!--<h3>Installment List <span id="new-installment-span"></span></h3>
-      <div id="installment-template" style="display:none">
-        <ul>
-          {{#each data}}
-            <li>Installment Title: <a href="/installment-detail.html?id={{this._id}}">{{this.name}}</a>
-            {{#if ../token}}
-              <button class="delete" data-type="installments" data-id="{{this._id}}">delete</button>
-            {{/if}}
-            </li>
-          {{/each}}
-        </ul>
-      </div>-->
-      <!--<div id="installment-list"></div>
-      <h3>Users</h3>
-      <div id="userlist-template" style="display:none">
-        <ul>
-          {{#each data}}
-            <li>Username: <a href="/user-detail.html?id={{this._id}}">{{this.username}}</a>
-            {{#if ../token}}
-              <button class="delete" data-type="users" data-id="{{this._id}}">delete</button>
-            {{/if}}
-            </li>
-          {{/each}}
-        </ul>
-      </div>
-      <div id="user-list">
-      </div> -->
-      <div id="user-options"></div>
-      <form id="login-form">
-          <div>
-            <label for="name">Username:</label>
-            <input name="name" type="text" id="username" required />
-          </div>
-          <div>
-            <label for="pass">Password:</label>
-            <input name="pass" type="password" id="password" required />
-          </div>
-          <div class="button">
-            <button type="submit">Log In</button>
-          </div>
-        </form>
+    </div>
+    <!--<h3>Installment List <span id="new-installment-span"></span></h3>
+    <div id="installment-template" style="display:none">
+      <ul>
+        {{#each data}}
+          <li>Installment Title: <a href="/installment-detail.html?id={{this._id}}">{{this.name}}</a>
+          {{#if ../token}}
+            <button class="delete" data-type="installments" data-id="{{this._id}}">delete</button>
+          {{/if}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>-->
+    <!--<div id="installment-list"></div>
+    <h3>Users</h3>
+    <div id="userlist-template" style="display:none">
+      <ul>
+        {{#each data}}
+          <li>Username: <a href="/user-detail.html?id={{this._id}}">{{this.username}}</a>
+          {{#if ../token}}
+            <button class="delete" data-type="users" data-id="{{this._id}}">delete</button>
+          {{/if}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+    <div id="user-list">
+    </div> -->
+    <div id="user-options"></div>
+    <form id="login-form">
+        <div>
+          <label for="name">Username:</label>
+          <input name="name" type="text" id="username" required />
+        </div>
+        <div>
+          <label for="pass">Password:</label>
+          <input name="pass" type="password" id="password" required />
+        </div>
+        <div class="button">
+          <button type="submit">Log In</button>
+        </div>
+      </form>
 
         <form id="signup-form">
           <div>
@@ -113,9 +115,11 @@
   </footer>
 </body>
   <script src="lib/scripts/jquery-3.1.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
   <script src="./lib/scripts/superagent.js"></script>
   <script src="lib/scripts/handlebars.min-v4.0.5.js"></script>
   <script src="lib/scripts/js.cookie.js"></script>
+  <script src="./scripts/template.js"></script>
   <script src="./scripts/login.js"></script>
   <script src="./scripts/signup.js"></script>
   <script src="index.js"></script>

@@ -20,17 +20,17 @@
       <p>
         <form id="series-form">
           <div>
-            <label for="name">Search by Name:</label>
+            <label for="name">Search for Series by Name:</label>
             <input name="name" type="text" id="series_name" required />
           </div>
-          <!--<div>
-            <label for="genre">Genre:</label>
-            <input name="genre" type="text" id="series_genre" />
-          </div>
           <div>
-            <label for="desc">Description:</label>
-            <textarea name="desc" type="text" id="series_description"></textarea>
-          </div>-->
+            <label for="genre">Type:</label>
+            <select name="genre" type="text" id="series_genre">
+              <option value="book">Book</option>
+              <option value="tv">TV Show</option>
+              <option value="movie">Movie</option>
+            </select>
+          </div>
           <button type="submit">Add Series</button>
         </form>
       </p>
