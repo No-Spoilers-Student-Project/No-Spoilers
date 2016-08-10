@@ -24,7 +24,7 @@ describe('user endpoints', () => {
     .then( result => {
       const resultObj = JSON.parse(result.res.text);
       testRunner.token = resultObj.token;
-      testRunner.id = resultObj.id;
+      testRunner.id = resultObj.payload.id;
       return Promise.all([
         request.post('/api/users').set('token',testRunner.token).send(testUser),
         request.post('/api/users').set('token',testRunner.token).send(testUser1)
