@@ -1,9 +1,8 @@
 <section>
   <div class="series-details-template">
-    <h3>Series Name: <span class="series-name">{{name}}</span></h3>
-    <p>Genre: {{genre}} </p>
+    <h3>Series Name: <span class="series-name" data-id="{{this._id}}">{{name}}</span></h3>
     <p>Description: {{description}}</p>
-    <button data-id="{{this._id}}">Installments</button>
+    <!--<button>Installments</button>-->
     <div id="brief-{{this._id}}"></div>
     <!-- <a href="/"><button>Back to Main Page</button></a> -->
     <!-- <button class="delete" data-id="{{this._id}}">Delete This Series</button> -->

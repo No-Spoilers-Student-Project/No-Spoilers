@@ -1,6 +1,6 @@
 (function(module) {
   function getCompiledTemplate(name) {
-    console.log( 'in getCompiledTemplate');
+    // console.log( 'in getCompiledTemplate');
     return superagent
       .get('../hbs/' + name + '.hbs')
       .then(res => {

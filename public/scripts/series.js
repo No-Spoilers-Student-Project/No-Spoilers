@@ -56,6 +56,29 @@
     });
   };
 
+  series.viewSeries = function() {
+    $('#series-list').on('click', '.series-name', function(event) {
+      $('#landing-page').empty();
+      const seriesId = $(this).data('id');
+      
+      superagent
+        .get('api/series/' + seriesId)
+        .then( function(data) {
+          data.body.installments.forEach( function(show, index) {
+            data.body.installments[index].releaseDate = moment(show.releaseDate).format('MM-DD-YYYY');
+          });
+          toHtml('series-overview', data.body, '#landing-page');
+        })
+        .catch( err => {
+          console.log(err);
+          $('#notification-bar').text('Error occurred getting installments list');
+        });
+
+
+    });
+  };
+
+  series.viewSeries();
   series.getSeries();
   series.viewBriefs();
   module.series = series;
