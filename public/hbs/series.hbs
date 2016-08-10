@@ -3,9 +3,9 @@
     <h3>Series Name: <span class="series-name">{{name}}</span></h3>
     <p>Genre: {{genre}} </p>
     <p>Description: {{description}}</p>
-    <button data-id="{{this._id}}">Show Installments</button>
+    <button id= "show-{{this._id}}" data-id="{{this._id}}">Show Installments</button>
     <div id="{{this._id}}"></div>
-    <button id="change-{{this._id}}">Change Approvals</button>
+    <button id="change-{{this._id}}" data-id="{{this._id}}">Change Approvals</button>
     <!-- <a href="/"><button>Back to Main Page</button></a> -->
     <!-- <button class="delete" data-id="{{this._id}}">Delete This Series</button> -->
   </div>
