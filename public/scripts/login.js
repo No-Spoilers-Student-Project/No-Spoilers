@@ -17,10 +17,10 @@
   };
 
   login.userOptions = function () {
-    console.log(tempToken);
-    console.log(loginUser);
+    // console.log(tempToken);
+    // console.log(loginUser);
     if(tempToken) {
-      $('#user-options').html(`<p>Current User: ${loginUser} <button id="logout">Log Out</button></p>`);
+      $('#user-options').html(`<p>Current User: ${loginUser} <button id="logout">Log Out</button> <button id="go-user">User Page</button> <button id="go-home" style="display: none;">Home Page</button></p>`);
     } else {
       $('#user-options').html('<button id="login-button">Log In</button> <button id="signup-button">Sign Up</button>');
     }
@@ -50,6 +50,7 @@
         .post('/api/login')
         .send(data)
         .then(result => {
+          console.log(result.body);
           let token = result.body.token;
           let userId = result.body.payload.id;
           Cookies.set('id', userId, { expires: 7} );
@@ -73,7 +74,7 @@
           toHtml('series', e, '#user-series');
         });
       });
-  };  
+  };
 
   login.startLogin();
   login.userOptions();
