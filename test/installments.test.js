@@ -35,7 +35,6 @@ describe('installment endpoints', () => {
       done();
     })
     .catch( err => {
-      console.log(err);
       done(err);
     });
   });
