@@ -18,6 +18,9 @@
   "bugs": {
     "url": "https://github.com/No-Spoilers/No-Spoilers.git/issues"
   },
+  "engines": {
+    "node": "6.3.1"
+  },
   "homepage": "https://github.com/No-Spoilers/No-Spoilers.git#readme",
   "devDependencies": {
     "chai": "^3.5.0",
