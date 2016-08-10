@@ -69,7 +69,7 @@ a {
 
 /* Add new series page */
 
-.series-option {
+.series-option, .episode-list {
   width: 758px;
   margin: 5rem auto;
   border: 2px solid black;
@@ -82,4 +82,11 @@ a {
 
 .inner-series-option p {
   font-size: 2rem;
+}
+
+/* Episode list expansion */
+
+.episode-list {
+  background-color: #aaf;
+  padding: 1.5rem;
 }
