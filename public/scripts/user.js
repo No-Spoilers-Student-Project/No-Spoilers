@@ -26,36 +26,59 @@
     });
   };
 
+  user.logOut = function () {
 
-  user.getInstallments = function () {
-    let userId = Cookies.get('id');
-    console.log(userId);
-    $('#user-series').on('click', 'button[data-id]', (e) => {
-      e.preventDefault();
-      let location = '#' + $(e.target).data('id');
-      console.log($(e.target).text());
-      if($(e.target).text() === 'Show Installments') {
-        $(e.target).text('Hide Installments');
-        superagent
-          .get('api/installments/' + $(e.target).data('id') + '/approvals/' + userId)
-          .then(result => {
-            result.body.forEach(e => {
-              // e.releaseDate = moment(e.releaseDate).format('MM DD YYYY');
-              if(e.summary[0] === 'You have not apporoved this installment for viewing.') {
-                e.notApproved = true;
-              } else {
-                e.approved = true;
-              }
-              console.log(e.approved);
-              toHtml('installments', e, location);
-            });
-          });
-      } else {
-        $(location).empty();
-        $(e.target).text('Show Installments');
-      }
-    });
   };
+
+  // user.getInstallments = function () {
+  //   let userId = Cookies.get('id');
+  //   let seriesId = $(e.target).data('id');
+  //   console.log(userId);
+  //   $('#user-series').on('click', 'button[data-id]', (e) => {
+  //     e.preventDefault();
+  //     let location = '#' + $(e.target).data('id');
+  //     console.log($(e.target).text());
+  //     if($(e.target).text() === 'Show Installments') {
+  //       $(e.target).text('Hide Installments');
+  //       user.installmentsAPI(seriesId, userId);
+  //       // superagent
+  //       //   .get('api/installments/' + $(e.target).data('id') + '/approvals/' + userId)
+  //       //   .then(result => {
+  //       //     result.body.forEach(e => {
+  //       //       // e.releaseDate = moment(e.releaseDate).format('MM DD YYYY');
+  //       //       if(e.summary[0] === 'You have not apporoved this installment for viewing.') {
+  //       //         e.notApproved = true;
+  //       //       } else {
+  //       //         e.approved = true;
+  //       //       }
+  //       //       console.log(e.approved);
+  //       //       toHtml('installments', e, location);
+  //       //     });
+  //       //   });
+  //     } else {
+  //       $(location).empty();
+  //       $(e.target).text('Show Installments');
+  //     }
+  //   });
+  // };
+
+  user.installmentsAPI = function (seriesId, userId) {
+    superagent
+      .get('api/installments/' + seriesId + '/approvals/' + userId)
+      .then(result => {
+        result.body.forEach(e => {
+          e.releaseDate = moment(e.releaseDate).format('MM DD YYYY');
+          if(e.summary[0] === 'You have not approved this installment for viewing.') {
+            e.notApproved = true;
+          } else {
+            e.approved = true;
+          }
+          console.log(e.approved);
+          toHtml('installments', e, location);
+        });
+      });
+  };
+
 
   user.manageApprovals = function() {
     $('#user-series').on('click', 'button[id]', e => {
@@ -90,7 +113,7 @@
   };
 
   user.manageApprovals();
-  user.getInstallments();
+  // user.getInstallments();
   user.goToUserPage();
   user.goToLanding();
   module.user = user;

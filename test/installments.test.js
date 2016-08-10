@@ -22,7 +22,7 @@ describe('installment endpoints', () => {
     .then( result => {
       const resultObj = JSON.parse(result.res.text);
       testUser.token = resultObj.token;
-      testUser.id = resultObj.id;
+      testUser.id = resultObj.payload.id;
       return Promise.all([
         request.post('/api/installments').set('token',testUser.token).send(testInstallment),
         request.post('/api/installments').set('token',testUser.token).send(testInstallment1)
@@ -34,6 +34,7 @@ describe('installment endpoints', () => {
       done();
     })
     .catch( err => {
+      console.log(err);
       done(err);
     });
   });

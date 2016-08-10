@@ -23,7 +23,7 @@ describe('series endpoints', () => {
     .then( result => {
       const resultObj = JSON.parse(result.res.text);
       testUser.token = resultObj.token;
-      testUser.id = resultObj.id;
+      testUser.id = resultObj.payload.id;
       return Promise.all([
         request.post('/api/series').set('token',testUser.token).send(testSeries),
         request.post('/api/series').set('token',testUser.token).send(testSeries1)

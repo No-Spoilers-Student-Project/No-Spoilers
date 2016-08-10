@@ -50,6 +50,7 @@
         .post('/api/login')
         .send(data)
         .then(result => {
+          console.log(result.body);
           let token = result.body.token;
           let userId = result.body.payload.id;
           Cookies.set('id', userId, { expires: 7} );
