@@ -26,29 +26,14 @@
           <div>
             <label for="genre">Type:</label>
             <select name="genre" type="text" id="series_genre">
-              <option value="book">Book</option>
               <option value="tv">TV Show</option>
+              <option value="book">Book</option>
               <option value="movie">Movie</option>
             </select>
           </div>
-          <button type="submit">Add Series</button>
+          <button type="submit">Search</button>
         </form>
       </p>
-      <div id="result-template" style="display:none;">
-        <h3>Import From TVDB:</h3>
-          {{#each data}}
-            <div class="series-option" data-seriesid="{{this.seriesid}}">
-              <img src="http://thetvdb.com/banners/{{this.banner}}" alt="{{this.SeriesName}} Banner" />
-              <div class="inner-series-option">
-                <p>Series Name: <span class="">{{this.SeriesName}}</span></p>
-                <p>Network: <span class="">{{this.Network}}</span></p>
-                <p>First Aired: <span class="">{{this.FirstAired}}</span></p>
-                <p>Overview: <span class="">{{this.Overview}}</span></p>
-              </div>
-            </div>
-          {{/each}}
-        </ul>
-      </div>
       <div id="results"></div>
     </main>
   </div>
@@ -56,6 +41,56 @@
     &copy; No Spoilers - Geoffrey Emerson, Arielle Foldoe, Aaron Bini - <a href="https://github.com/No-Spoilers/No-Spoilers">Github Page</a>
   </footer>
 </body>
+
+<script id="tv-result-template" type="text/x-handlebars-template">
+  <h3>Import From TVDB:</h3>
+  {{#each data}}
+    <div class="series-option" data-seriesid="{{this.seriesid}}">
+      <img src="http://thetvdb.com/banners/{{this.banner}}" alt="{{this.SeriesName}} Banner" />
+      <div class="inner-series-option">
+        <button class="show-episodes" data-seriesid="{{this.seriesid}}" data-type="tv" style="float:right;">Show Episodes</button>
+        <button class="add-series" data-seriesid="{{this.seriesid}}" data-type="tv" style="float:right;">Add This Series</button>
+        <p>Series Name: <span class="">{{this.SeriesName}}</span></p>
+        <p>Network: <span class="">{{this.Network}}</span></p>
+        <p>First Aired: <span class="">{{this.FirstAired}}</span></p>
+        <p>Overview: <span class="">{{this.Overview}}</span></p>
+      </div>
+    </div>
+    <div id="eipsodes-{{this.seriesid}}"></div>
+  {{/each}}
+</script>
+
+<script id="tv-episodes-template" type="text/x-handlebars-template">
+  <h4>Episode List:</h4>
+    {{#each data}}
+      <div class="episode-list" data-episodeid="{{this.id}}">
+        <img src="http://thetvdb.com/banners/{{this.filename}}" alt="{{this.EpisodeName}} Episode Image" style="float:right;margin:1rem;" />
+        <p>Episode Title: <span class="">{{this.EpisodeName}}</span></p>
+        <p>Episode Number: <span class="">{{this.SeasonNumber}}-{{this.EpisodeNumber}}</span></p>
+        <p>First Aired: <span class="">{{this.FirstAired}}</span></p>
+        <p>Overview: <span class="">{{this.Overview}}</span></p>
+        <div style="clear:both"></div>
+      </div>
+    {{/each}}
+</script>
+
+<script id="book-result-template" type="text/x-handlebars-template">
+  <h3>Import From GoodReads:</h3>
+    {{#each data}}
+      <div class="series-option" data-seriesid="{{this.seriesid}}">
+        <img src="{{this.image_url}}" alt="{{this.title}} Cover Image" style="float:left" />
+        <div class="inner-series-option">
+          <li>Title: <span class="">{{this.title}}</span></li>
+          <li>Author: <span class="">{{this.author}}</span></li>
+          <li>Published: <span class="">{{this.pub_date}}</span></li>
+          <!-- The GoodReads ID would be necessary to track back to a book series -->
+          <!--<li>GR ID: <span class="">{{this.id}}</span></li>-->
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+    {{/each}}
+  </ul>
+</script>
 
 <script src="lib/scripts/jquery-3.1.0.min.js"></script>
 <script src="lib/scripts/handlebars.min-v4.0.5.js"></script>
