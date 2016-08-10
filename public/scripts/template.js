@@ -1,10 +1,10 @@
 (function(module) {
   function getCompiledTemplate(name) {
-    // console.log( 'in getCompiledTemplate');
+    console.log( 'called getCompiledTemplate');
     return superagent
       .get('../hbs/' + name + '.hbs')
       .then(res => {
-        // console.log(res.text);
+        console.log('superagent loaded template',name);
         return Handlebars.compile(res.text);
       });
   };

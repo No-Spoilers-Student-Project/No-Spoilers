@@ -62,7 +62,7 @@
 
   function renderSeriesOverview(series) {
     const loginId = Cookies.get('id');
-    $('#landing-page').empty();
+    //$('#landing-page').empty();
     let seriesId = $(this).data('id');
     if(!seriesId) seriesId = series;
     getApprovedData(seriesId,loginId);
@@ -94,6 +94,7 @@
     const token = Cookies.get('token');
 
     $('#landing-page').on('click', '.approval-button', function(){
+      $('#landing-page').off('click', '.approval-button');
       const series = $(this).data('series');
       const dataObj = {};
       if($(this).data('unapproved')) {
