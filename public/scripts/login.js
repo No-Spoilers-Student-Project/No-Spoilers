@@ -3,6 +3,7 @@
   const login = {};
   let tempToken = Cookies.get('token');
   let loginUser = Cookies.get('username');
+  let loginId = Cookies.get('id');
 
   login.startLogin = function() {
     $('#login-form button').on('click', event => {
@@ -24,8 +25,6 @@
       $('#user-options').html('<button id="login-button">Log In</button> <button id="signup-button">Sign Up</button>');
     }
   };
-
-
 
   login.userData = function() {
     const data = {};
@@ -51,16 +50,31 @@
         .post('/api/login')
         .send(data)
         .then(result => {
-          let token = JSON.parse(result.text);
-          Cookies.set('token',token.token, { expires: 7 });
+          let token = result.body.token;
+          let userId = result.body.payload.id;
+          Cookies.set('id', userId, { expires: 7} );
+          Cookies.set('token',token, { expires: 7 });
           Cookies.set('username',data.username, { expires: 7 });
           loginUser = Cookies.get('username');
           tempToken = Cookies.get('token');
+          loginId = Cookies.get('id');
           login.userOptions();
+          login.getSeries(loginId);
           // document.location.href = '/';
         });
     };
   };
+
+  login.getSeries = function(id) {
+    superagent
+      .get(`/api/series/user/${id}`)
+      .then(result => {
+        result.body.forEach(e => {
+          toHtml('series', e, '#user-series');
+        });
+      });
+  };  
+
   login.startLogin();
   login.userOptions();
 
