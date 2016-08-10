@@ -18,7 +18,8 @@ describe('installment endpoints', () => {
   let testBadInstallment = { name: '', length: 45 };
 
   before( done => {
-    request.post('/api/signup').send(testUser)
+    request.post('/api/signup')
+    .send(testUser)
     .then( result => {
       const resultObj = JSON.parse(result.res.text);
       testUser.token = resultObj.token;
