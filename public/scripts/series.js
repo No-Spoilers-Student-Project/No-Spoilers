@@ -56,6 +56,73 @@
     });
   };
 
+  series.viewSeries = function() {
+    $('#series-list').on('click', '.series-name', renderSeriesOverview);
+  };
+
+  function renderSeriesOverview(series) {
+    const loginId = Cookies.get('id');
+    //$('#landing-page').empty();
+    let seriesId = $(this).data('id');
+    if(!seriesId) seriesId = series;
+    getApprovedData(seriesId,loginId);
+  }  
+
+  function getApprovedData(seriesId,loginId) {
+    superagent
+    .get('api/series/' + seriesId) 
+    .then( function(data) {
+      superagent
+      .get('api/installments/' + seriesId + '/approvals/' + loginId)
+      .then( function(instData) {
+        instData.body.forEach( function(show, index) {
+          instData.body[index].releaseDate = moment(show.releaseDate).format('MM-DD-YYYY');
+        });
+        data.body.installments = instData.body;
+        toHtml('series-overview', data.body, '#landing-page');
+        series.approvalButton();
+      });
+    })
+    .catch( err => {
+      console.log(err);
+      $('#notification-bar').text('Error occurred getting installments list');
+    });
+  }
+
+  series.approvalButton = function() {
+    const loginId = Cookies.get('id');
+    const token = Cookies.get('token');
+
+    $('#landing-page').on('click', '.approval-button', function(){
+      $('#landing-page').off('click', '.approval-button');
+      const series = $(this).data('series');
+      const dataObj = {};
+      if($(this).data('unapproved')) {
+        dataObj.add = [ $(this).data('id') ];
+        dataObj.remove = [];
+      }
+      else if($(this).data('approved')) {
+        dataObj.add = [];
+        dataObj.remove = [ $(this).data('id') ];
+      }
+
+      superagent
+      .put('/api/users/' + loginId + '/approvals')
+      .set({token})
+      .send(dataObj)
+      .then(data => {
+        // console.log(data);
+        // alert('You have updated your approvals.');
+        renderSeriesOverview(series);
+      })
+      .catch( err => {
+        console.log(err);
+        $('#notification-bar').text('Error occurred approving/unapproving installment');
+      });
+    });
+  };
+
+  series.viewSeries();
   series.getSeries();
   series.viewBriefs();
   module.series = series;

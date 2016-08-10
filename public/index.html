@@ -34,17 +34,6 @@
       <h1>No Spoilers</h1>
       <h2>Database Overview</h2>
       <h4>Currently Active Series: <span id="new-series-span"></span></h4>
-      <div id="series-template" style="display:none">
-        <ul>
-          {{#each data}}
-            <li>Series Name: <a href="/series-detail.html?id={{this._id}}">{{this.name}}</a>
-            {{#if ../token}}
-              <button class="delete" data-type="series" data-id="{{this._id}}">delete</button>
-            {{/if}}
-            </li>
-          {{/each}}
-        </ul>
-      </div>
       <div id="series-list"></div>
     </div>
     <!--<h3>Installment List <span id="new-installment-span"></span></h3>
@@ -117,6 +106,20 @@
     &copy; No Spoilers - Geoffrey Emerson, Arielle Foldoe, Aaron Bini - <a href="https://github.com/No-Spoilers/No-Spoilers">Github Page</a>
   </footer>
 </body>
+
+  <!--<script id="series-template">
+    <ul>
+      {{#each data}}
+        <li>Series Name: <a href="/series-detail.html?id={{this._id}}">{{this.name}}</a>
+        {{#if ../token}}
+          <button class="delete" data-type="series" data-id="{{this._id}}">delete</button>
+        {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+  </script>-->
+
+
   <script src="lib/scripts/jquery-3.1.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
   <script src="./lib/scripts/superagent.js"></script>

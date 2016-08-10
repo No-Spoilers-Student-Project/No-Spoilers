@@ -33,7 +33,6 @@
   user.getInstallments = function () {
     let userId = Cookies.get('id');
 
-    console.log(userId);
     $('#user-series').on('click', 'button[data-id]', function(e) {
       let seriesId = $(e.target).data('id');
       e.preventDefault();

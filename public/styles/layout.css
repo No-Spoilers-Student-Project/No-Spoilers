@@ -69,7 +69,7 @@ a {
 
 /* Add new series page */
 
-.series-option, .episode-list {
+.series-option, .episode-list, .installment-box {
   max-width: 758px;
   margin: 5rem auto;
   border: 2px solid black;
@@ -90,4 +90,18 @@ a {
 .episode-list {
   background-color: #aaf;
   padding: 1.5rem;
+}
+
+.installment-box {
+  padding: 2rem;
+}
+
+.installment-box button {
+  background-color: #bbb;
+}
+
+/* Landing page */
+
+.series-name {
+  color: blue;
 }
