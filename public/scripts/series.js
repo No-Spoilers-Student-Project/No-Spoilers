@@ -7,9 +7,8 @@
     superagent
       .get('api/series')
       .then(data => {
-        console.log(data.body);
         data.body.forEach(e => {
-          series.toHtml('series', e, '#series-list');
+          series.toHtml('brief-series', e, '#series-list');
         });
 
       })
@@ -35,8 +34,6 @@
   series.viewBriefs = function () {
 
     $('#series-list').on('click', '.installments-brief', function(e) {
-      console.log('clicked installments brief');
-      console.log(this);
       e.preventDefault();
       if ($(this).hasClass('active')) {
         $(this).removeClass('active').addClass('inactive');

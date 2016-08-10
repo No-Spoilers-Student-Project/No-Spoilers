@@ -18,11 +18,12 @@ describe('installment endpoints', () => {
   let testBadInstallment = { name: '', length: 45 };
 
   before( done => {
-    request.post('/api/signup').send(testUser)
+    request.post('/api/signup')
+    .send(testUser)
     .then( result => {
       const resultObj = JSON.parse(result.res.text);
       testUser.token = resultObj.token;
-      testUser.id = resultObj.id;
+      testUser.id = resultObj.payload.id;
       return Promise.all([
         request.post('/api/installments').set('token',testUser.token).send(testInstallment),
         request.post('/api/installments').set('token',testUser.token).send(testInstallment1)

@@ -1,0 +1,11 @@
+<div id="installment-list-template">
+    <h4>Installment Title: <span class="installment-title">{{this.name}}</span></h4>
+    <!--<p>Release Date: <span>{{releaseDate}}</span></p>-->
+    <p>Summary: <span>{{this.summary}}</span></p>
+    {{#if this.approved}}
+      <label for="deleteApproval"><input data-id="{{this._id}}" name="deleteApproval" type="checkbox" value="delete"> Delete Approval</label>
+    {{/if}}
+    {{#if this.notApproved}}
+      <label for="addApproval"><input data-id="{{this._id}}" name="addApproval" type="checkbox" value="add"> Add Approval</label>
+    {{/if}}
+</div>
