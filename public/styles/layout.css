@@ -95,3 +95,13 @@ a {
 .installment-box {
   padding: 2rem;
 }
+
+.installment-box button {
+  background-color: #bbb;
+}
+
+/* Landing page */
+
+.series-name {
+  color: blue;
+}
