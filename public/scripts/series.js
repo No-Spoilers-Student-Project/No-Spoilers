@@ -22,12 +22,10 @@
   series.toHtml = function (filename, series, location) {
     getCompiledTemplate(filename).then((handlebarsCompile) => {
       const html = handlebarsCompile(series);
-      // console.log(html);
       $(location).append(html);
     })
     .catch(err => {
       console.log(err);
-      //do something if err
     });
   };
 
@@ -110,9 +108,7 @@
       .put('/api/users/' + loginId + '/approvals')
       .set({token})
       .send(dataObj)
-      .then(data => {
-        // console.log(data);
-        // alert('You have updated your approvals.');
+      .then( () => {
         renderSeriesOverview(series);
       })
       .catch( err => {
