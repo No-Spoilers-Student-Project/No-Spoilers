@@ -70,10 +70,11 @@ a {
 /* Add new series page */
 
 .series-option, .episode-list {
-  width: 758px;
+  max-width: 758px;
   margin: 5rem auto;
   border: 2px solid black;
   background-color: #77f;
+  overflow: hidden;
 }
 
 .inner-series-option {

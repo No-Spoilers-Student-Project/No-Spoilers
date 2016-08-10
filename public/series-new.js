@@ -2,6 +2,7 @@
 
 const token = Cookies.get('token');
 
+// Button Click: Search remote APIs for series
 $('#series-form').on('submit', function(event) {
   event.preventDefault();
 
@@ -10,12 +11,13 @@ $('#series-form').on('submit', function(event) {
     type: $('#series_genre').val()
   };
 
+  // TV series search is through The TV Database
   if(!data.name) $('#notification-bar').text('Search Term Required');
   else {
     $('#results').html('<h2>Searching Remote Database...</h2>');
     if(data.type === 'tv') {
       $.ajax({
-        url: '/api/series/search/tvdb/' + data.name,
+        url: '/api/tvdb/search/' + data.name,
         type: 'GET'
       })
       .done( function(result) {
@@ -29,6 +31,8 @@ $('#series-form').on('submit', function(event) {
         }
       });
     }
+
+    // Book series search is through GoodReads
     else if(data.type === 'book') {
       $.ajax({
         url: '/api/series/search/goodreads/' + data.name,
@@ -53,21 +57,19 @@ $('#series-form').on('submit', function(event) {
   }
 });
 
+// Button Click: Show episodes for a specific series (after searching)
 $('#results').on('click', '.show-episodes', function(event) {
   event.preventDefault();
   const seriesId = $(this).data('seriesid');
   const type = $(this).data('type');
-  console.log('Series selected:', type, seriesId);
 
-// https://api.thetvdb.com/series/77398/episodes
-
+  // Only works for tv so far
   if(type === 'tv') {
     $.ajax({
-      url: '/api/series/search/tvdb/' + seriesId + '/episodes',
+      url: '/api/tvdb/episodes/' + seriesId,
       type: 'GET'
     })
     .done( function(result) {
-      console.log('result:',result);
       const episodesToHtml = Handlebars.compile($('#tv-episodes-template').html());
       result.sort( function(a,b) {
         if(a.FirstAired == b.FirstAired) {
@@ -84,21 +86,23 @@ $('#results').on('click', '.show-episodes', function(event) {
       }
     });
   }
-
 });
 
+// Button Click: Add Series (After searching)
 $('#results').on('click', '.add-series', function() {
   const seriesId = $(this).data('seriesid');
   $.ajax({
-    url: '/api/series/tvdb/' + seriesId,
+    url: '/api/tvdb/' + seriesId,
     type: 'GET'
   })
   .done( function(result) {
+    console.log('full result from tvdb search:');
+    console.log(result);
     const data = {
       name: result.SeriesName,
-      description: result.Overview
+      description: result.Overview,
+      tvdbid: result.id
     };
-    console.log('add series, stage 1 result:',data);
     if(!data.name || data.name==='') $('#results').html('<h3>No results</h3>');
     else {
       pushSeries(data);
@@ -114,11 +118,49 @@ function pushSeries(data) {
     data: JSON.stringify(data)
   })
   .done( function(result) {
-    console.log('add series, stage 2 result:',result);
-    window.location.href = 'series-detail.html?id=' + result._id;
-//    window.location.href = 'installment-detail.html?id=' + result._id;
+    console.log('new series added:',result.tvdbid);
+    pushInstallments(result.tvdbid,result._id);
+    // window.location.href = 'series-detail.html?id=' + result._id;
   })
   .fail( function(err) {
     console.log('Error: ' + err.status + ' ' + err.statusText + ' - ' + err.responseText);
+  });
+}
+
+function pushInstallments(tvdbSeriesId,localSeriesId) {
+  $.ajax({
+    url: '/api/tvdb/episodes/' + tvdbSeriesId,
+    type: 'GET'
+  })
+  .done( function(result) {
+    console.log('full result from tvdb episode search:');
+    console.log(result);
+    result.forEach( function(episode){
+      const data = {
+        name: episode.EpisodeName,
+        medium: 'tv',
+        summary: episode.Overview,
+        tvdbid: episode.id,
+        releaseDate: episode.FirstAired,
+        series: localSeriesId,
+        imageLink: 'http://thetvdb.com/banners/' + episode.filename,
+        season: episode.SeasonNumber,
+        episode: episode.EpisodeNumber
+      };
+      $.ajax({
+        url: '/api/installments/',
+        type: 'POST',
+        headers: { 'token': token },
+        data: JSON.stringify(data)
+      })
+      .done( function(result) {
+        console.log('new installment added:',result);
+      })
+      .fail( function(err) {
+        console.log('Error: ' + err.status + ' ' + err.statusText + ' - ' + err.responseText);
+        console.log(err);
+      });
+
+    });
   });
 }
