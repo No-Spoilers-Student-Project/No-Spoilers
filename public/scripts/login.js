@@ -7,7 +7,6 @@
   login.startLogin = function() {
     $('#login-form button').on('click', event => {
       event.preventDefault();
-      console.log('called login.startLogin');
       // $('#landing-page').hide();
       login.userData();
       $('#login-form').remove();

@@ -120,7 +120,6 @@
     obj.login = 'Login';
     $('#signup-form').hide();
     toHtml('login-form', obj, '#user-options', login.startLogin);
-    
   });
 
 

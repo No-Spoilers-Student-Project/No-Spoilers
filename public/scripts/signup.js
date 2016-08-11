@@ -15,7 +15,6 @@
     data.username = $('#signupUsername').val();
     data.password = $('#signupPassword').val();
     data.confirm = $('#confirm').val();
-    console.log(data);
     signup.sendData(data);
   };
 
@@ -43,7 +42,6 @@
           Cookies.set('username',data.username, { expires: 7 });
           token = Cookies.get('token');
           // document.location.href = '/';
-          console.log('about to call userOptions');
           login.userOptions(token);
         });
     }
