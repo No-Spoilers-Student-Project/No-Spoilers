@@ -8,7 +8,7 @@
       .get('api/series')
       .then(data => {
         data.body.forEach(e => {
-          series.toHtml('brief-series', e, '#series-list');
+          toHtml('brief-series', e, '#series-list');
         });
 
       })
@@ -18,21 +18,7 @@
       });
   };
 
-  //export this function to its own module to DRY up code
-  series.toHtml = function (filename, series, location) {
-    getCompiledTemplate(filename).then((handlebarsCompile) => {
-      const html = handlebarsCompile(series);
-      // console.log(html);
-      $(location).append(html);
-    })
-    .catch(err => {
-      console.log(err);
-      //do something if err
-    });
-  };
-
   series.viewBriefs = function () {
-
     $('#series-list').on('click', '.installments-brief', function(e) {
       e.preventDefault();
       if ($(this).hasClass('active')) {
@@ -41,8 +27,8 @@
           .get('api/installments/' + $(this).data('id'))
           .then(data => {
             data.body.forEach(e => {
-              e.releaseDate = moment(e.releaseDate).format('MM DD YYYY');
-              series.toHtml('brief-install', e, `#details-${this.id}`);
+              e.releaseDate = moment(e.releaseDate).format('MM-DD-YYYY');
+              toHtml('brief-install', e, `#details-${this.id}`);
             });
           })
           .catch(err => {
@@ -60,15 +46,15 @@
     $('#series-list').on('click', '.series-name', renderSeriesOverview);
   };
 
-  function renderSeriesOverview(series) {
+  function renderSeriesOverview (series) {
     let loginId = Cookies.get('id');
     let seriesId = $(this).data('id');
     $('#landing-page').empty();
     if(!seriesId) seriesId = series;
     getApprovedData(seriesId,loginId);
-  }
+  };
 
-  function getApprovedData(seriesId,loginId) {
+  function getApprovedData (seriesId,loginId) {
     superagent
     .get('api/series/' + seriesId)
     .then( function(data) {
@@ -87,7 +73,7 @@
       console.log(err);
       $('#notification-bar').text('Error occurred getting installments list');
     });
-  }
+  };
 
   series.approvalButton = function() {
     let loginId = Cookies.get('id');
@@ -112,8 +98,6 @@
       .set({token})
       .send(dataObj)
       .then(data => {
-        // console.log(data);
-        // alert('You have updated your approvals.');
         renderSeriesOverview(series);
       })
       .catch( err => {

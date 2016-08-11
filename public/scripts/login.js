@@ -18,7 +18,6 @@
   login.startLogin = function() {
     $('#login-form button').on('click', function(event) {
       event.preventDefault();
-      // $('#landing-page').hide();
       $('#login-form').hide();
       login.userData();
     });
@@ -54,6 +53,7 @@
         .post('/api/login')
         .send(data)
         .then(result => {
+          console.log(result);
           let token = result.body.token;
           let userId = result.body.payload.id;
           Cookies.set('id', userId, { expires: 7} );
@@ -64,6 +64,9 @@
           loginId = Cookies.get('id');
           login.userOptions();
           login.getSeries(loginId);
+        })
+        .catch(err => {
+          $('#notification-bar').text('Login Error.');
         });
     };
   };
@@ -72,7 +75,6 @@
     superagent
       .get(`/api/series/user/${id}`)
       .then(result => {
-        console.log(result.body);
         result.body.forEach(e => {
           toHtml('series', e, '#user-series');
         });

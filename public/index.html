@@ -16,7 +16,7 @@
         <div class="row">
           <div class="twelve columns">
             <ul id="nav-buttons">
-              <li><a>Home</a></li>
+              <li><a href="/">Home</a></li>
               <li><a href="" id="signup-link">Sign Up!</a></li>
               <li><a href="" id="login-link">Login</a></li>
               <li><a id="about-button">About</a></li>
@@ -33,37 +33,39 @@
 
     <div id="user-options"></div>
 
-    <form id="login-form">
-      <div>
-        <label for="name">Username:</label>
-        <input name="name" type="text" id="username" required />
-      </div>
-      <div>
-        <label for="pass">Password:</label>
-        <input name="pass" type="password" id="password" required />
-      </div>
-      <div class="button">
-        <button type="submit">Log In</button>
-      </div>
-    </form>
+    <section id="form-section">
+      <form id="login-form">
+        <div>
+          <label for="name">Username:</label>
+          <input name="name" type="text" id="username" required />
+        </div>
+        <div>
+          <label for="pass">Password:</label>
+          <input name="pass" type="password" id="password" required />
+        </div>
+        <div class="button">
+          <button type="submit">Log In</button>
+        </div>
+      </form>
 
-    <form id="signup-form">
-      <div>
-        <label for="name">Username:</label>
-        <input name="name" type="text" id="signupUsername" required />
-      </div>
-      <div>
-        <label for="pass">Password:</label>
-        <input name="pass" type="password" id="signupPassword" required />
-      </div>
-      <div>
-        <label for="conf">Confirm:</label>
-        <input name="conf" type="password" id="confirm" required />
-      </div>
-      <div class="button">
-        <button type="submit">Sign Up</button>
-      </div>
-    </form>
+      <form id="signup-form">
+        <div>
+          <label for="name">Username:</label>
+          <input name="name" type="text" id="signupUsername" required />
+        </div>
+        <div>
+          <label for="pass">Password:</label>
+          <input name="pass" type="password" id="signupPassword" required />
+        </div>
+        <div>
+          <label for="conf">Confirm:</label>
+          <input name="conf" type="password" id="confirm" required />
+        </div>
+        <div class="button">
+          <button type="submit">Sign Up</button>
+        </div>
+      </form>
+    </section>
 
     <div id="landing-page">
       <h1>No Spoilers</h1>
@@ -71,38 +73,14 @@
       <h4>Currently Active Series: <span id="new-series-span"></span></h4>
       <div id="series-list"></div>
     </div>
-    <!--<h3>Installment List <span id="new-installment-span"></span></h3>
-    <div id="installment-template" style="display:none">
-      <ul>
-        {{#each data}}
-          <li>Installment Title: <a href="/installment-detail.html?id={{this._id}}">{{this.name}}</a>
-          {{#if ../token}}
-            <button class="delete" data-type="installments" data-id="{{this._id}}">delete</button>
-          {{/if}}
-          </li>
-        {{/each}}
-      </ul>
-    </div>-->
-    <!--<div id="installment-list"></div>
-    <h3>Users</h3>
-    <div id="userlist-template" style="display:none">
-      <ul>
-        {{#each data}}
-          <li>Username: <a href="/user-detail.html?id={{this._id}}">{{this.username}}</a>
-          {{#if ../token}}
-            <button class="delete" data-type="users" data-id="{{this._id}}">delete</button>
-          {{/if}}
-          </li>
-        {{/each}}
-      </ul>
-    </div>
-    <div id="user-list">
-    </div> -->
+
 
     <section id="series-details"></section>
 
     <section id="user-page" style="display: none;">
       <a href="/"><button>Back to Main Page</button></a>
+      <h2>Your Series Overview</h2>
+      <h4>Click on a Series Name to Add/Remove Approvals</h4>
       <div id="user-series"></div>
     </section>
 
@@ -126,3 +104,33 @@
   <script src="index.js"></script>
   <script src="./scripts/series.js"></script>
 </html>
+
+
+
+<!--<h3>Installment List <span id="new-installment-span"></span></h3>
+<div id="installment-template" style="display:none">
+  <ul>
+    {{#each data}}
+      <li>Installment Title: <a href="/installment-detail.html?id={{this._id}}">{{this.name}}</a>
+      {{#if ../token}}
+        <button class="delete" data-type="installments" data-id="{{this._id}}">delete</button>
+      {{/if}}
+      </li>
+    {{/each}}
+  </ul>
+</div>-->
+<!--<div id="installment-list"></div>
+<h3>Users</h3>
+<div id="userlist-template" style="display:none">
+  <ul>
+    {{#each data}}
+      <li>Username: <a href="/user-detail.html?id={{this._id}}">{{this.username}}</a>
+      {{#if ../token}}
+        <button class="delete" data-type="users" data-id="{{this._id}}">delete</button>
+      {{/if}}
+      </li>
+    {{/each}}
+  </ul>
+</div>
+<div id="user-list">
+</div> -->

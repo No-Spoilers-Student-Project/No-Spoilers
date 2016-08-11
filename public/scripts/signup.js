@@ -4,7 +4,6 @@
   signup.showForm = function() {
     $('#signup-link,#signup-button').on('click', function(event) {
       event.preventDefault();
-      console.log('got here signup');
       $('#signup-form').show();
       $('#login-form').hide();
       // $('#user-options').hide();
@@ -23,7 +22,6 @@
     data.username = $('#signupUsername').val();
     data.password = $('#signupPassword').val();
     data.confirm = $('#confirm').val();
-    console.log(data);
     signup.sendData(data);
   };
 
@@ -40,13 +38,11 @@
     if(data.password != data.confirm) {
       $('#notification-bar').text('Password and Confirmation must match');
     } else {
-      console.log('data sending to /api/signup:',JSON.stringify(data));
       superagent
         .post('/api/signup')
         .send(JSON.stringify(data))
         .then(result => {
           let token = JSON.parse(result.text);
-          console.log(token);
           Cookies.set('token',token.token, { expires: 7 });
           Cookies.set('username',data.username, { expires: 7 });
           document.location.href = '/';
