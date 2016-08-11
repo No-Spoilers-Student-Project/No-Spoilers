@@ -69,7 +69,7 @@ a {
 
 /* Add new series page */
 
-.series-option, .episode-list, .installment-box {
+.series-option, .episode-list, .installment-box, .series-details-template{
   max-width: 758px;
   margin: 5rem auto;
   border: 2px solid black;
@@ -105,3 +105,8 @@ a {
 .series-name {
   color: blue;
 }
+
+#add-series-button {
+  float: right;
+}
+

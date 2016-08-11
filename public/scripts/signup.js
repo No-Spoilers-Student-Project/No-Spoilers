@@ -40,6 +40,7 @@
           console.log(token);
           Cookies.set('token',token.token, { expires: 7 });
           Cookies.set('username',data.username, { expires: 7 });
+          Cookies.set('id',data._id, { expires: 7 });
           document.location.href = '/';
         });
     }
