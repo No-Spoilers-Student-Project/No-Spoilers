@@ -1,0 +1,14 @@
+  <h3>Import From GoodReads:</h3>
+  {{#each data}}
+    <div class="series-option" data-seriesid="{{this.seriesid}}">
+      <img src="{{this.image_url}}" alt="{{this.title}} Cover Image" style="float:left" />
+      <div class="inner-series-option">
+        <li>Title: <span class="">{{this.title}}</span></li>
+        <li>Author: <span class="">{{this.author}}</span></li>
+        <li>Published: <span class="">{{this.pub_date}}</span></li>
+        <!-- The GoodReads ID would be necessary to track back to a book series -->
+        <!--<li>GR ID: <span class="">{{this.id}}</span></li>-->
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+  {{/each}}
