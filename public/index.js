@@ -7,13 +7,7 @@
   // let seriesToHtml;//, installmentsToHtml;
   //
   // const loginUser = Cookies.get('username');
-  const token = Cookies.get('token');
 
-  if(token) {
-    // $('#new-series-span').html('<a href="series-new.html"><button>New</button></a>');
-    // $('#new-installment-span').html('<a href="installment-new.html"><button>New</button></a>');
-    //$('#new-user-span').html('<a href="series-new.html"><button>New</button></a>');
-  }
   Handlebars.registerHelper('if', function(conditional, options) {
     if(conditional) {
       return options.fn(this);
@@ -93,34 +87,7 @@
   //   });
   // });
 
-  $('body').on('click', '#logout', function() {
-    Cookies.remove('token');
-    Cookies.remove('username');
-    Cookies.remove('id');
-    $('#landing-page').show();
-    document.location.reload(true);
-  });
 
-  $('#signup-link,#signup-button').on('click', function(event) {
-    event.preventDefault();
-    let obj = {};
-    obj.username = 'Username';
-    obj.password = 'Password';
-    obj.signup = 'Sign Up';
-    obj.confirm = 'Confirm';
-    $('#login-form').hide();
-    toHtml('signup-form', obj, '#user-options', signup.startSignup);
-  });
-
-  $('#login-link,#login-button').on('click', function(event) {
-    event.preventDefault();
-    let obj = {};
-    obj.username = 'Username';
-    obj.password = 'Password';
-    obj.login = 'Login';
-    $('#signup-form').hide();
-    toHtml('login-form', obj, '#user-options', login.startLogin);
-  });
 
   module.user = user;
 })(window);

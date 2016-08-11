@@ -12,7 +12,7 @@
       $('#go-user').hide();
       $('#user-page').show();
       $('#user-series').empty();
-      login.getSeries(userId);
+      user.getSeries(userId);
     });
   };
 
@@ -26,8 +26,12 @@
     });
   };
 
-  user.logOut = function () {
-
+  user.getSeries = function(id) {
+    superagent
+    .get(`/api/series/user/${id}`)
+    .then( result => {
+      toHtml('series', result.body, '#user-series');
+    });
   };
 
   user.getInstallments = function () {
