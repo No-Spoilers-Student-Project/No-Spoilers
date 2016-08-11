@@ -16,6 +16,7 @@
     superagent
       .get('api/series')
       .then(data => {
+        console.log(data);
         toHtml('brief-series', data, '#series-list', function(){
           const token = Cookies.get('token');
           if(token) {
@@ -25,7 +26,6 @@
         });
       })
       .catch(err => {
-        console.log(err);
         $('#notification-bar').text('Error occurred getting series list');
       });
   };
@@ -35,7 +35,7 @@
     $('#home-link').on('click', function(event) {
       event.preventDefault();
       series.renderLandingPage();
-    }); 
+    });
   };
 
   function renderAddSeries(){
@@ -45,42 +45,6 @@
       addSeries.setAddSeriesButtonListener();
     });
   }
-
-  //export this function to its own module to DRY up code
-  // series.toHtml = function (filename, series, location, callback) {
-  //   getCompiledTemplate(filename).then((handlebarsCompile) => {
-  //     const html = handlebarsCompile(series);
-  //     $(location).append(html);
-  //     if(callback) callback();
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   });
-  // };
-
-  // series.viewBriefsListener = function () {
-  //   $('#series-list').on('click', '.installments-brief', function(e) {
-  //     e.preventDefault();
-  //     if ($(this).hasClass('active')) {
-  //       $(this).removeClass('active').addClass('inactive');
-  //       superagent
-  //         .get('api/installments/' + $(this).data('id'))
-  //         .then(data => {
-  //           data.body.forEach(e => {
-  //             e.releaseDate = moment(e.releaseDate).format('MM DD YYYY');
-  //             series.toHtml('brief-install', e, `#details-${this.id}`);
-  //           });
-  //         })
-  //         .catch(err => {
-  //           console.log(err);
-  //           $('#notification-bar').text('Error occurred getting installments list');
-  //         });
-  //     } else {
-  //       $(this).removeClass('inactive').addClass('active');
-  //       $('.details-display').empty();
-  //     }
-  //   });
-  // };
 
   // Sets up a listener to switch to the series overview view for a specific series
   series.viewSeriesListener = function() {
@@ -100,7 +64,7 @@
   // Part 2 of rendering Series Overview View
   function getApprovedData(seriesId,loginId) {
     superagent
-    .get('api/series/' + seriesId) 
+    .get('api/series/' + seriesId)
     .then( function(data) {
       superagent
       .get('api/installments/' + seriesId + '/approvals/' + loginId)
@@ -114,10 +78,9 @@
       });
     })
     .catch( err => {
-      console.log(err);
       $('#notification-bar').text('Error occurred getting installments list');
     });
-  }
+  };
 
   // Part 3 of rendering Series Overview View
   // Sets up a listener to handle installment approvals
@@ -125,7 +88,8 @@
     const loginId = Cookies.get('id');
     const token = Cookies.get('token');
 
-    $('#landing-page').on('click', '.approval-button', function(){
+    $('#landing-page').on('click', '.approval-button', function(e){
+      e.preventDefault();
       $('#landing-page').off('click', '.approval-button');
       const seriesId = $(this).data('series');
       const dataObj = {};
@@ -146,7 +110,6 @@
         series.renderSeriesOverview(seriesId);
       })
       .catch( err => {
-        console.log(err);
         $('#notification-bar').text('Error occurred approving/unapproving installment');
       });
     });

@@ -1,5 +1,4 @@
 (function(module) {
-
   function toHtml(filename, obj, location, callback) {
     getCompiledTemplate(filename)
     .then((handlebarsCompile) => {

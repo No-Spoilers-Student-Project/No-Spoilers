@@ -1,6 +1,17 @@
 (function(module) {
   const signup = {};
 
+  //  signup.showForm();
+  // signup.showForm = function() {
+  //   $('#signup-link,#signup-button').on('click', function(event) {
+  //     event.preventDefault();
+  //     $('#signup-form').show();
+  //     $('#login-form').hide();
+  //     // $('#user-options').hide();
+  //   });
+  // };
+
+  // Event listener setup for using the sign up form. Called from toHtml in 
   signup.startSignup = function() {
     $('#signup-form button').on('click', event => {
       event.preventDefault();
@@ -41,5 +52,4 @@
   };
 
   module.signup = signup;
-
 })(window);

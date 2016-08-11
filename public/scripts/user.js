@@ -5,10 +5,11 @@
   user.goToUserPage = function () {
     $('#user-options').on('click', '#go-user', e => {
       e.preventDefault();
-      let userId = Cookies.get('id');
+      const userId = Cookies.get('id');
+      $('#user-page').show();
       $('#landing-page').hide();
       $('#login-form').hide();
-      $('#go-home').show();
+      // $('#go-home').show();
       $('#go-user').hide();
       $('#user-page').show();
       $('#user-series').empty();
@@ -16,13 +17,9 @@
     });
   };
 
-  user.goToLanding = function () {
-    $('#user-options').on('click', '#go-home', e => {
-      e.preventDefault();
-      $('#landing-page').show();
-      $('#go-home').hide();
-      $('#go-user').show();
-      $('#user-page').hide();
+  user.goHome = function () {
+    $('#back-to-main').on('click', function(){
+      document.location.href = '/';
     });
   };
 
@@ -34,99 +31,58 @@
     });
   };
 
-  user.getInstallments = function () {
-    let userId = Cookies.get('id');
-
-    $('#user-series').on('click', 'button[data-id]', function(e) {
-      let seriesId = $(e.target).data('id');
-      e.preventDefault();
-      console.log($(e.target).data('name'));
-      if ($(e.target).data('name') === 'show') {
-        let location = '#' + $(e.target).data('id');
-        console.log($(e.target).text());
-        if($(e.target).text() === 'Show Installments') {
-          $(e.target).text('Hide Installments');
-          user.installmentsAPI(seriesId, userId, location);
-          // superagent
-          //   .get('api/installments/' + $(e.target).data('id') + '/approvals/' + userId)
-          //   .then(result => {
-          //     result.body.forEach(e => {
-          //       // e.releaseDate = moment(e.releaseDate).format('MM DD YYYY');
-          //       if(e.summary[0] === 'You have not apporoved this installment for viewing.') {
-          //         e.notApproved = true;
-          //       } else {
-          //         e.approved = true;
-          //       }
-          //       console.log(e.approved);
-          //       toHtml('installments', e, location);
-          //     });
-          //   });
-        } else {
-          $(location).empty();
-          $(e.target).text('Show Installments');
-        }
-      } else {
-        user.manageApprovals();
-      }
-
-
-    });
+  user.manageApprovals = function () {
+    $('#user-series').on('click', '.series-name', renderSeriesOverview);
   };
 
-  user.installmentsAPI = function (seriesId, userId, location) {
+  function renderSeriesOverview (series) {
+    let loginId = Cookies.get('id');
+    let seriesId = $(this).data('id');
+    $('#landing-page').empty();
+    if(!seriesId) seriesId = series;
+    getApprovedData(seriesId,loginId);
+    $('#landing-page').show();
+    $('#user-page').hide();
+  };
+
+  function getApprovedData (seriesId,loginId) {
     superagent
-      .get('api/installments/' + seriesId + '/approvals/' + userId)
-      .then(result => {
-        result.body.forEach(e => {
-          e.releaseDate = moment(e.releaseDate).format('MM DD YYYY');
-          if(e.summary[0] === 'You have not approved this installment for viewing.') {
-            e.notApproved = true;
-          } else {
-            e.approved = true;
-          }
-          console.log(e.approved);
-          toHtml('installments', e, location);
+    .get('api/series/' + seriesId)
+    .then( function(data) {
+      superagent
+      .get('api/installments/' + seriesId + '/approvals/' + loginId)
+      .then( function(instData) {
+        instData.body.forEach( function(show, index) {
+          instData.body[index].releaseDate = moment(show.releaseDate).format('MM-DD-YYYY');
         });
+        data.body.installments = instData.body;
+        console.log(data.body);
+        toHtml('series-overview', data.body, '#landing-page');
+        series.approvalButton();
       });
-  };
-
-
-  user.manageApprovals = function() {
-    // $('#user-series').on('click', 'button[id]', e => {
-    //   e.preventDefault();
-    let data = {};
-    data.add = [];
-    data.remove = [];
-    let userId = Cookies.get('id');
-    let token = Cookies.get('token');
-    $('input[type=checkbox]:checked').each(function() {
-      console.log($(this));
-      if($(this).val() === 'add') {
-        data.add.push($(this).data('id'));
-      } else {
-        data.remove.push($(this).data('id'));
-      }
+    })
+    .catch( err => {
+      $('#notification-bar').text('Error occurred getting installments list');
+      console.log('Error occurred getting installments list',err);
     });
-    console.log(data);
-    superagent
-      .put('/api/users/' + userId + '/approvals')
-      .set({token})
-      .send(data)
-      .then(data => {
-        console.log(data);
-        alert('You have updated your approvals.');
-      });
-    // let location = '#' + $(e.target).id;
-    // if(e.target.value === 'delete') {
-    // }
-
-    // });
-
   };
 
-  // user.manageApprovals();
-  user.getInstallments();
+  user.logOut = function () {
+    $('body').on('click', '#logout', function() {
+      Cookies.remove('token');
+      Cookies.remove('username');
+      $('#landing-page').show();
+      $('#user-series').empty();
+      $('#user-options').html('<button id="login-button">Log In</button> <button id="signup-button">Sign Up</button>');
+      document.location.href = '/';
+      document.location.reload(true);
+    });
+  };
+
+  user.logOut();
   user.goToUserPage();
-  user.goToLanding();
+  user.manageApprovals();
+  user.goHome();
+  
   module.user = user;
 })(window);
