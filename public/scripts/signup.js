@@ -43,6 +43,7 @@
           token = Cookies.get('token');
           // document.location.href = '/';
           login.userOptions(token);
+          Cookies.set('id',data._id, { expires: 7 });
         });
     }
   };

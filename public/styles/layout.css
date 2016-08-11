@@ -85,7 +85,7 @@ a {
 
 /* Add new series page */
 
-.series-option, .episode-list, .installment-box {
+.series-option, .episode-list, .installment-box, .series-details-template{
   max-width: 758px;
   margin: 5rem auto;
   border: 2px solid black;
@@ -122,12 +122,7 @@ a {
   color: blue;
 }
 
-/*#nav-buttons li {
-  font-size: 1.5rem;
-  padding: 1rem;
+#add-series-button {
+  float: right;
 }
 
-#nav-buttons {
-  width: 60%;
-  margin-left: 50%;
-}*/

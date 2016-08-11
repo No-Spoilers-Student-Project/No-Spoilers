@@ -11,21 +11,21 @@
 <body>
   <div id="above-footer-container">
     <header>
-
       <!-- nav -->
       <nav class="container">
         <div class="row">
           <div class="twelve columns">
             <ul id="nav-buttons">
-              <li><a href="/">Home</a></li>
+              <li><a href="/" id="home-link">Home</a></li>
               <li><a href="" id="signup-link">Sign Up!</a></li>
               <li><a href="" id="login-link">Login</a></li>
-              <li><a id="about-button">About</a></li>
+              <li><a href="" id="about-link">About</a></li>
             </ul>
           </div>
         </div>
       </nav>
       <!-- /nav -->
+<<<<<<< HEAD
 
     <div id="notification-bar"></div>
 
@@ -87,7 +87,6 @@
           <button type="submit">Log In</button>
         </div>
       </form>-->
-
         <!--<form id="signup-form">
           <div>
             <label for="name">Username:</label>
@@ -105,8 +104,6 @@
             <button type="submit">Sign Up</button>
           </div>
         </form>-->
-
-      <!--<p id="results"></p>-->
     </main>
   </div>
   <footer>
@@ -114,29 +111,18 @@
   </footer>
 </body>
 
-  <!--<script id="series-template">
-    <ul>
-      {{#each data}}
-        <li>Series Name: <a href="/series-detail.html?id={{this._id}}">{{this.name}}</a>
-        {{#if ../token}}
-          <button class="delete" data-type="series" data-id="{{this._id}}">delete</button>
-        {{/if}}
-        </li>
-      {{/each}}
-    </ul>
-  </script>-->
-
-
   <script src="lib/scripts/jquery-3.1.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
-  <script src="./lib/scripts/superagent.js"></script>
+  <script src="lib/scripts/moment.min.js"></script>
+  <script src="lib/scripts/superagent.js"></script>
   <script src="lib/scripts/handlebars.min-v4.0.5.js"></script>
   <script src="lib/scripts/js.cookie.js"></script>
-  <script src="./scripts/template.js"></script>
-  <script src="./scripts/to-html.js"></script>
-  <script src="./scripts/user.js"></script>
-  <script src="./scripts/login.js"></script>
-  <script src="./scripts/signup.js"></script>
+
+  <script src="scripts/series-new.js"></script>
+  <script src="scripts/template.js"></script>
+  <script src="scripts/to-html.js"></script>
+  <script src="scripts/user.js"></script>
+  <script src="scripts/login.js"></script>
+  <script src="scripts/signup.js"></script>
+  <script src="scripts/series.js"></script>
   <script src="index.js"></script>
-  <script src="./scripts/series.js"></script>
 </html>

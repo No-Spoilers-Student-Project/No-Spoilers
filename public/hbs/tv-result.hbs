@@ -1,0 +1,15 @@
+<h3>Import From TVDB:</h3>
+{{#each data}}
+  <div class="series-option" data-seriesid="{{this.seriesid}}">
+    <img src="http://thetvdb.com/banners/{{this.banner}}" alt="{{this.SeriesName}} Banner" />
+    <div class="inner-series-option">
+      <button class="show-episodes" data-seriesid="{{this.seriesid}}" data-type="tv" style="float:right;">Show Episodes</button>
+      <button class="add-series" data-seriesid="{{this.seriesid}}" data-type="tv" style="float:right;">Add This Series</button>
+      <p>Series Name: <span class="">{{this.SeriesName}}</span></p>
+      <p>Network: <span class="">{{this.Network}}</span></p>
+      <p>First Aired: <span class="">{{this.FirstAired}}</span></p>
+      <p>Overview: <span class="">{{this.Overview}}</span></p>
+    </div>
+  </div>
+  <div id="eipsodes-{{this.seriesid}}"></div>
+{{/each}}
