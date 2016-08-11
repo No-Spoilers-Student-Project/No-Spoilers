@@ -73,13 +73,17 @@
     superagent
       .get(`/api/series/user/${id}`)
       .then(result => {
-        result.body.forEach(e => {
-          toHtml('series', e, '#user-series');
-        })
+        console.log(result.body);
+        const overview = {};
+        overview.series = result.body;
+        toHtml('series', overview, '#user-series');
+        // result.body.forEach(e => {
+        //   toHtml('series', e, '#user-series');
+        // })
       })
       .catch(err => {
         $('#notification-bar').text('Error retrieving series. Try again.');;
-    });
+      });
   };
 
   login.userOptions();

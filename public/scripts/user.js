@@ -12,7 +12,7 @@
       // $('#go-home').show();
       $('#go-user').hide();
       $('#user-page').show();
-      $('#user-series').empty();
+      // $('#user-series').empty();
       login.getSeries(userId);
     });
   };
@@ -58,6 +58,7 @@
           instData.body[index].releaseDate = moment(show.releaseDate).format('MM-DD-YYYY');
         });
         data.body.installments = instData.body;
+        console.log(data.body);
         toHtml('series-overview', data.body, '#landing-page');
         series.approvalButton();
       });

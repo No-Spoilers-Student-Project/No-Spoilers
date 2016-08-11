@@ -106,11 +106,12 @@
       superagent
         .get('/api/tvdb/' + seriesId)
         .then(result => {
+          console.log(result);
           const data = {
-            name: result.SeriesName,
-            description: result.Overview,
-            tvdbid: result.id,
-            firstAired: result.FirstAired
+            name: result.body.SeriesName,
+            description: result.body.Overview,
+            tvdbid: result.body.id,
+            firstAired: result.body.FirstAired
           };
           if(!data.name || data.name==='') $('#results').html('<h3>No results</h3>');
           else {

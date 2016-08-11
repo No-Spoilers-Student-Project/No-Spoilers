@@ -16,6 +16,7 @@
     superagent
       .get('api/series')
       .then(data => {
+        console.log(data);
         toHtml('brief-series', data, '#series-list', function(){
           const token = Cookies.get('token');
           if(token) {

@@ -1,8 +1,9 @@
 (function(module) {
-  function toHtml(filename, obj, location) {
+  function toHtml(filename, obj, location, callback) {
     getCompiledTemplate(filename)
     .then((handlebarsCompile) => {
       const html = handlebarsCompile(obj);
+      $(location).empty();
       $(location).append(html);
       if(callback) callback();
     })
