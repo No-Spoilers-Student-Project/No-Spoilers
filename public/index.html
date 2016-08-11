@@ -30,6 +30,41 @@
 
   </header>
   <main>
+
+    <div id="user-options"></div>
+
+    <form id="login-form">
+      <div>
+        <label for="name">Username:</label>
+        <input name="name" type="text" id="username" required />
+      </div>
+      <div>
+        <label for="pass">Password:</label>
+        <input name="pass" type="password" id="password" required />
+      </div>
+      <div class="button">
+        <button type="submit">Log In</button>
+      </div>
+    </form>
+
+    <form id="signup-form">
+      <div>
+        <label for="name">Username:</label>
+        <input name="name" type="text" id="signupUsername" required />
+      </div>
+      <div>
+        <label for="pass">Password:</label>
+        <input name="pass" type="password" id="signupPassword" required />
+      </div>
+      <div>
+        <label for="conf">Confirm:</label>
+        <input name="conf" type="password" id="confirm" required />
+      </div>
+      <div class="button">
+        <button type="submit">Sign Up</button>
+      </div>
+    </form>
+
     <div id="landing-page">
       <h1>No Spoilers</h1>
       <h2>Database Overview</h2>
@@ -63,62 +98,20 @@
     </div>
     <div id="user-list">
     </div> -->
-    <section id="user-page">
+
+    <section id="series-details"></section>
+
+    <section id="user-page" style="display: none;">
+      <a href="/"><button>Back to Main Page</button></a>
       <div id="user-series"></div>
     </section>
-    <div id="user-options"></div>
-    <form id="login-form">
-        <div>
-          <label for="name">Username:</label>
-          <input name="name" type="text" id="username" required />
-        </div>
-        <div>
-          <label for="pass">Password:</label>
-          <input name="pass" type="password" id="password" required />
-        </div>
-        <div class="button">
-          <button type="submit">Log In</button>
-        </div>
-      </form>
 
-        <form id="signup-form">
-          <div>
-            <label for="name">Username:</label>
-            <input name="name" type="text" id="signupUsername" required />
-          </div>
-          <div>
-            <label for="pass">Password:</label>
-            <input name="pass" type="password" id="signupPassword" required />
-          </div>
-          <div>
-            <label for="conf">Confirm:</label>
-            <input name="conf" type="password" id="confirm" required />
-          </div>
-          <div class="button">
-            <button type="submit">Sign Up</button>
-          </div>
-        </form>
-
-      <!--<p id="results"></p>-->
     </main>
   </div>
   <footer>
     &copy; No Spoilers - Geoffrey Emerson, Arielle Foldoe, Aaron Bini - <a href="https://github.com/No-Spoilers/No-Spoilers">Github Page</a>
   </footer>
 </body>
-
-  <!--<script id="series-template">
-    <ul>
-      {{#each data}}
-        <li>Series Name: <a href="/series-detail.html?id={{this._id}}">{{this.name}}</a>
-        {{#if ../token}}
-          <button class="delete" data-type="series" data-id="{{this._id}}">delete</button>
-        {{/if}}
-        </li>
-      {{/each}}
-    </ul>
-  </script>-->
-
 
   <script src="lib/scripts/jquery-3.1.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>

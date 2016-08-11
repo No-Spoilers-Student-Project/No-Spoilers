@@ -8,7 +8,7 @@
       const html = handlebarsCompile(obj);
       console.log('Done compiling html from data');
       console.log('------------------------------');
-      $(location).empty();
+      // $(location).empty();
       $(location).append(html);
     })
     .catch(err => {

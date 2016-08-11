@@ -1,10 +1,19 @@
 (function(module) {
   const signup = {};
 
+  signup.showForm = function() {
+    $('#signup-link,#signup-button').on('click', function(event) {
+      event.preventDefault();
+      console.log('got here signup');
+      $('#signup-form').show();
+      $('#login-form').hide();
+      // $('#user-options').hide();
+    });
+  };
+
   signup.startSignup = function() {
     $('#signup-form button').on('click', event => {
       event.preventDefault();
-      console.log(`button clicked`);
       signup.userData();
     });
   };
@@ -21,10 +30,10 @@
   signup.sendData = function(data) {
     if(!data.username) {
       $('#notification-bar').text('Username Required');
-    } else 
+    } else
     if (!data.password) {
       $('#notification-bar').text('Password Required');
-    } else 
+    } else
     if (!data.confirm) {
       $('#notification-bar').text('Please confirm your password');
     } else
@@ -45,12 +54,9 @@
     }
   };
 
+  signup.showForm();
   signup.startSignup();
 
   module.signup = signup;
 
 })(window);
-
-
-  
-

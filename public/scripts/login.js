@@ -5,22 +5,28 @@
   let loginUser = Cookies.get('username');
   let loginId = Cookies.get('id');
 
-  login.startLogin = function() {
-    $('#login-form button').on('click', event => {
+  login.showForm = function () {
+    $('#login-link, #login-button').on('click', function(event) {
       event.preventDefault();
-      console.log('button clicked');
-      $('#landing-page').hide();
+      console.log('got here');
+      $('#signup-form').hide();
+      $('#login-form').show();
+      // $('#user-options').hide();
+    });
+  };
+
+  login.startLogin = function() {
+    $('#login-form button').on('click', function(event) {
+      event.preventDefault();
+      // $('#landing-page').hide();
       $('#login-form').hide();
       login.userData();
-
     });
   };
 
   login.userOptions = function () {
-    // console.log(tempToken);
-    // console.log(loginUser);
     if(tempToken) {
-      $('#user-options').html(`<p>Current User: ${loginUser} <button id="logout">Log Out</button> <button id="go-user">User Page</button> <button id="go-home" style="display: none;">Home Page</button></p>`);
+      $('#user-options').html(`<p>Current User: ${loginUser} <button id="logout">Log Out</button> <button id="go-user">User Page</button></p>`);
     } else {
       $('#user-options').html('<button id="login-button">Log In</button> <button id="signup-button">Sign Up</button>');
     }
@@ -39,18 +45,15 @@
     } else {
       $('#notification-bar').text('Username and Password Required');
     }
-    console.log(data);
     login.userLogin(data);
   };
 
   login.userLogin = function(data) {
-
     if(data.username && data.password) {
       superagent
         .post('/api/login')
         .send(data)
         .then(result => {
-          console.log(result.body);
           let token = result.body.token;
           let userId = result.body.payload.id;
           Cookies.set('id', userId, { expires: 7} );
@@ -61,7 +64,6 @@
           loginId = Cookies.get('id');
           login.userOptions();
           login.getSeries(loginId);
-          // document.location.href = '/';
         });
     };
   };
@@ -70,14 +72,16 @@
     superagent
       .get(`/api/series/user/${id}`)
       .then(result => {
+        console.log(result.body);
         result.body.forEach(e => {
           toHtml('series', e, '#user-series');
         });
       });
   };
 
-  login.startLogin();
   login.userOptions();
+  login.showForm();
+  login.startLogin();
 
   module.login = login;
 

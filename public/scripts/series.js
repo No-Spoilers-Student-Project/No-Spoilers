@@ -61,16 +61,16 @@
   };
 
   function renderSeriesOverview(series) {
-    const loginId = Cookies.get('id');
-    //$('#landing-page').empty();
+    let loginId = Cookies.get('id');
     let seriesId = $(this).data('id');
+    $('#landing-page').empty();
     if(!seriesId) seriesId = series;
     getApprovedData(seriesId,loginId);
-  }  
+  }
 
   function getApprovedData(seriesId,loginId) {
     superagent
-    .get('api/series/' + seriesId) 
+    .get('api/series/' + seriesId)
     .then( function(data) {
       superagent
       .get('api/installments/' + seriesId + '/approvals/' + loginId)
@@ -90,13 +90,14 @@
   }
 
   series.approvalButton = function() {
-    const loginId = Cookies.get('id');
-    const token = Cookies.get('token');
+    let loginId = Cookies.get('id');
+    let token = Cookies.get('token');
 
-    $('#landing-page').on('click', '.approval-button', function(){
+    $('#landing-page').on('click', '.approval-button', function(e){
+      e.preventDefault();
       $('#landing-page').off('click', '.approval-button');
-      const series = $(this).data('series');
-      const dataObj = {};
+      let series = $(this).data('series');
+      let dataObj = {};
       if($(this).data('unapproved')) {
         dataObj.add = [ $(this).data('id') ];
         dataObj.remove = [];

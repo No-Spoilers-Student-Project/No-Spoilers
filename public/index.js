@@ -94,26 +94,26 @@
   //   });
   // });
 
-  $('body').on('click', '#logout', function() {
-    Cookies.remove('token');
-    Cookies.remove('username');
-    $('#landing-page').show();
-    document.location.reload(true);
-  });
+  // $('body').on('click', '#logout', function() {
+  //   Cookies.remove('token');
+  //   Cookies.remove('username');
+  //   $('#landing-page').show();
+  //   document.location.reload(true);
+  // });
 
-  $('#signup-link,#signup-button').on('click', function(event) {
-    event.preventDefault();
-    $('#signup-form').show();
-    $('#login-form').hide();
-    // $('#user-options').hide();
-  });
+  // $('#signup-link,#signup-button').on('click', function(event) {
+  //   event.preventDefault();
+  //   $('#signup-form').show();
+  //   $('#login-form').hide();
+  //   // $('#user-options').hide();
+  // });
 
-  $('#login-link,#login-button').on('click', function(event) {
-    event.preventDefault();
-    $('#signup-form').hide();
-    $('#login-form').show();
-    // $('#user-options').hide();
-  });
+  // $('#login-link,#login-button').on('click', function(event) {
+  //   event.preventDefault();
+  //   $('#signup-form').hide();
+  //   $('#login-form').show();
+  //   // $('#user-options').hide();
+  // });
 
 
 
