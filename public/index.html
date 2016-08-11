@@ -6,6 +6,7 @@
   <link rel="stylesheet" type="text/css" href="./lib/styles/normalize.css">
   <link rel="stylesheet" type="text/css" href="./lib/styles/skeleton.css">
   <link rel="stylesheet" type="text/css" href="./styles/layout.css">
+  <link rel="stylesheet" type="text/css" href="./styles/modules.css">
 </head>
 <body>
   <div id="above-footer-container">
@@ -16,7 +17,7 @@
         <div class="row">
           <div class="twelve columns">
             <ul id="nav-buttons">
-              <li><a>Home</a></li>
+              <li><a href="/">Home</a></li>
               <li><a href="" id="signup-link">Sign Up!</a></li>
               <li><a href="" id="login-link">Login</a></li>
               <li><a id="about-button">About</a></li>
@@ -30,10 +31,16 @@
 
   </header>
   <main>
-    <div id="landing-page">
-      <h1>No Spoilers</h1>
-      <h2>Database Overview</h2>
-      <h4>Currently Active Series: <span id="new-series-span"></span></h4>
+    <div id="landing-page" class="container">
+      <div class="row">
+        <h1>No Spoilers</h1>
+      </div>
+      <div class="row">
+        <h2>Database Overview</h2>
+      </div>
+      <div class="row">
+        <h4>Add a Series: <span id="new-series-span"></span></h4>
+      </div>
       <div id="series-list"></div>
     </div>
     <!--<h3>Installment List <span id="new-installment-span"></span></h3>
@@ -67,7 +74,7 @@
       <div id="user-series"></div>
     </section>
     <div id="user-options"></div>
-    <form id="login-form">
+    <!--<form id="login-form">
         <div>
           <label for="name">Username:</label>
           <input name="name" type="text" id="username" required />
@@ -79,9 +86,9 @@
         <div class="button">
           <button type="submit">Log In</button>
         </div>
-      </form>
+      </form>-->
 
-        <form id="signup-form">
+        <!--<form id="signup-form">
           <div>
             <label for="name">Username:</label>
             <input name="name" type="text" id="signupUsername" required />
@@ -97,7 +104,7 @@
           <div class="button">
             <button type="submit">Sign Up</button>
           </div>
-        </form>
+        </form>-->
 
       <!--<p id="results"></p>-->
     </main>

@@ -9,22 +9,25 @@ header {
 
 }
 
-nav {
+nav.container {
+  margin: 0;
+  width: 100%;
+}
+
+nav div {
+  max-width: 100%;
   text-align: center;
 }
 
-#nav-buttons {
-  margin-top: 2rem;
+nav ul {
+  width: 100%;
+  margin-left: 10rem;
 }
 
 nav li {
   display: inline;
   padding: 5%;
   font-size: 2.5rem;
-}
-
-#login-form, #signup-form {
-  display: none;
 }
 
 main {
@@ -36,10 +39,23 @@ main {
   padding-bottom: 4rem;
 }
 
+.nav-links {
+  font-size: 2rem; 
+  padding: 1.5rem; 
+}
+
 #above-footer-container {
   min-height: 100%;
   height: auto;
   background-color: white;
+}
+
+#nav-buttons {
+  margin-top: 2rem;
+}
+
+#greeting {
+  margin-right: 25rem;
 }
 
 footer {
@@ -105,3 +121,13 @@ a {
 .series-name {
   color: blue;
 }
+
+/*#nav-buttons li {
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+#nav-buttons {
+  width: 60%;
+  margin-left: 50%;
+}*/

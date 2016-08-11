@@ -4,12 +4,13 @@
   signup.startSignup = function() {
     $('#signup-form button').on('click', event => {
       event.preventDefault();
-      console.log(`button clicked`);
       signup.userData();
+      $('#signup-form').hide();
     });
   };
 
   signup.userData = function() {
+    console.log('called userData');
     const data = {};
     data.username = $('#signupUsername').val();
     data.password = $('#signupPassword').val();
@@ -40,12 +41,14 @@
           console.log(token);
           Cookies.set('token',token.token, { expires: 7 });
           Cookies.set('username',data.username, { expires: 7 });
-          document.location.href = '/';
+          token = Cookies.get('token');
+          // document.location.href = '/';
+          console.log('about to call userOptions');
+          login.userOptions(token);
         });
     }
   };
 
-  signup.startSignup();
 
   module.signup = signup;
 

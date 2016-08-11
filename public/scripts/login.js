@@ -2,27 +2,33 @@
 
   const login = {};
   let tempToken = Cookies.get('token');
-  let loginUser = Cookies.get('username');
   let loginId = Cookies.get('id');
 
   login.startLogin = function() {
     $('#login-form button').on('click', event => {
       event.preventDefault();
-      console.log('button clicked');
-      $('#landing-page').hide();
-      $('#login-form').hide();
+      console.log('called login.startLogin');
+      // $('#landing-page').hide();
       login.userData();
-
+      $('#login-form').remove();
     });
   };
 
-  login.userOptions = function () {
-    // console.log(tempToken);
-    // console.log(loginUser);
-    if(tempToken) {
-      $('#user-options').html(`<p>Current User: ${loginUser} <button id="logout">Log Out</button> <button id="go-user">User Page</button> <button id="go-home" style="display: none;">Home Page</button></p>`);
+  login.userOptions = function (token) {
+    if(token) {
+      let loginUser = Cookies.get('username');
+      $('#new-series-span').html('<a href="series-new.html"><button>New</button></a>');
+      // $('#user-options').html(`<button id="logout">Log Out</button> <button id="go-user">User Page</button> <button id="go-home" style="display: none;">Home Page</button></p>`);
+      $('#signup-link').parent().remove();
+      $('#login-link').text('Logout');
+      $('#login-link').attr('id', 'logout');
+      let $hello = $('<li></li>').text('Hello, ' + loginUser + '!');
+      $hello.attr('id', 'greeting');
+      $('#nav-buttons').prepend($hello);
+      $('#nav-buttons li:first-child').siblings().attr('class', 'nav-links');
+      $('#landing-page h4').show();
     } else {
-      $('#user-options').html('<button id="login-button">Log In</button> <button id="signup-button">Sign Up</button>');
+      // $('#user-options').html('<button id="login-button">Log In</button> <button id="signup-button">Sign Up</button>');
     }
   };
 
@@ -39,7 +45,6 @@
     } else {
       $('#notification-bar').text('Username and Password Required');
     }
-    console.log(data);
     login.userLogin(data);
   };
 
@@ -59,9 +64,9 @@
           loginUser = Cookies.get('username');
           tempToken = Cookies.get('token');
           loginId = Cookies.get('id');
-          login.userOptions();
           login.getSeries(loginId);
           // document.location.href = '/';
+          login.userOptions(tempToken);
         });
     };
   };
@@ -76,9 +81,8 @@
       });
   };
 
-  login.startLogin();
-  login.userOptions();
-
+  
+  
   module.login = login;
 
 })(window);

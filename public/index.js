@@ -10,7 +10,7 @@
   const token = Cookies.get('token');
 
   if(token) {
-    $('#new-series-span').html('<a href="series-new.html"><button>New</button></a>');
+    // $('#new-series-span').html('<a href="series-new.html"><button>New</button></a>');
     // $('#new-installment-span').html('<a href="installment-new.html"><button>New</button></a>');
     //$('#new-user-span').html('<a href="series-new.html"><button>New</button></a>');
   }
@@ -103,16 +103,24 @@
 
   $('#signup-link,#signup-button').on('click', function(event) {
     event.preventDefault();
-    $('#signup-form').show();
+    let obj = {};
+    obj.username = 'Username';
+    obj.password = 'Password';
+    obj.signup = 'Sign Up';
+    obj.confirm = 'Confirm';
     $('#login-form').hide();
-    // $('#user-options').hide();
+    toHtml('signup-form', obj, '#user-options', signup.startSignup);
   });
 
   $('#login-link,#login-button').on('click', function(event) {
     event.preventDefault();
+    let obj = {};
+    obj.username = 'Username';
+    obj.password = 'Password';
+    obj.login = 'Login';
     $('#signup-form').hide();
-    $('#login-form').show();
-    // $('#user-options').hide();
+    toHtml('login-form', obj, '#user-options', login.startLogin);
+    
   });
 
 
