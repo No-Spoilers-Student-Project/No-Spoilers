@@ -91,23 +91,45 @@ $('#results').on('click', '.show-episodes', function(event) {
 // Button Click: Add Series (After searching)
 $('#results').on('click', '.add-series', function() {
   const seriesId = $(this).data('seriesid');
-  $.ajax({
-    url: '/api/tvdb/' + seriesId,
-    type: 'GET'
-  })
-  .done( function(result) {
-    console.log('full result from tvdb search:');
-    console.log(result);
-    const data = {
-      name: result.SeriesName,
-      description: result.Overview,
-      tvdbid: result.id
-    };
-    if(!data.name || data.name==='') $('#results').html('<h3>No results</h3>');
-    else {
-      pushSeries(data);
-    }
-  });
+  superagent
+    .get('/api/tvdb/' + seriesId)
+    .then(result => {
+      const data = {
+        name: result.SeriesName,
+        description: result.Overview,
+        tvdbid: result.id
+      };
+      if(!data.name || data.name==='') $('#results').html('<h3>No results</h3>');
+      else {
+        pushSeries(data);
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      $('#results').html('Series already added.');
+    });
+
+
+  // $.ajax({
+  //   url: '/api/tvdb/' + seriesId,
+  //   type: 'GET'
+  // })
+  // .done( function(result) {
+  //   console.log('full result from tvdb search:');
+  //   console.log(result);
+  //   const data = {
+  //     name: result.SeriesName,
+  //     description: result.Overview,
+  //     tvdbid: result.id
+  //   };
+  //   if(!data.name || data.name==='') $('#results').html('<h3>No results</h3>');
+  //   else {
+  //     pushSeries(data);
+  //   }
+  // })
+  // .fail( function(err) {
+  //   $('#results').html(`<h3>${err.message}</h3>`);
+  // });
 });
 
 function pushSeries(data) {

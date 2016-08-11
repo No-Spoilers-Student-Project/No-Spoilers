@@ -17,6 +17,12 @@
     });
   };
 
+  user.goHome = function () {
+    $('#back-to-main').on('click', function(){
+      document.location.href = '/';
+    });
+  };
+
   // user.goToLanding = function () {
   //   $('#user-options').on('click', '#go-home', e => {
   //     e.preventDefault();
@@ -57,7 +63,6 @@
       });
     })
     .catch( err => {
-      console.log(err);
       $('#notification-bar').text('Error occurred getting installments list');
     });
   };
@@ -67,6 +72,7 @@
       Cookies.remove('token');
       Cookies.remove('username');
       $('#landing-page').show();
+      $('#user-series').empty();
       $('#user-options').html('<button id="login-button">Log In</button> <button id="signup-button">Sign Up</button>');
       document.location.href = '/';
       document.location.reload(true);
@@ -76,6 +82,6 @@
   user.logOut();
   user.goToUserPage();
   user.manageApprovals();
-  // user.goToLanding();
+  user.goHome();
   module.user = user;
 })(window);

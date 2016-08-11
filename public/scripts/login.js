@@ -8,7 +8,6 @@
   login.showForm = function () {
     $('#login-link, #login-button').on('click', function(event) {
       event.preventDefault();
-      console.log('got here');
       $('#signup-form').hide();
       $('#login-form').show();
       // $('#user-options').hide();
@@ -53,7 +52,6 @@
         .post('/api/login')
         .send(data)
         .then(result => {
-          console.log(result);
           let token = result.body.token;
           let userId = result.body.payload.id;
           Cookies.set('id', userId, { expires: 7} );
@@ -66,7 +64,7 @@
           login.getSeries(loginId);
         })
         .catch(err => {
-          $('#notification-bar').text('Login Error.');
+          $('#notification-bar').text('Login Error. Try again.');
         });
     };
   };
@@ -77,8 +75,11 @@
       .then(result => {
         result.body.forEach(e => {
           toHtml('series', e, '#user-series');
-        });
-      });
+        })
+      })
+      .catch(err => {
+        $('#notification-bar').text('Error retrieving series. Try again.');;
+    });
   };
 
   login.userOptions();

@@ -1,5 +1,6 @@
 (function(module) {
   const signup = {};
+  let token = Cookies.get('token');
 
   signup.showForm = function() {
     $('#signup-link,#signup-button').on('click', function(event) {
@@ -26,27 +27,37 @@
   };
 
   signup.sendData = function(data) {
-    if(!data.username) {
-      $('#notification-bar').text('Username Required');
-    } else
-    if (!data.password) {
-      $('#notification-bar').text('Password Required');
-    } else
-    if (!data.confirm) {
-      $('#notification-bar').text('Please confirm your password');
-    } else
-    if(data.password != data.confirm) {
-      $('#notification-bar').text('Password and Confirmation must match');
+    if (token === undefined) {
+      if(!data.username) {
+        $('#notification-bar').text('Username Required');
+      } else
+      if (!data.password) {
+        $('#notification-bar').text('Password Required');
+      } else
+      if (!data.confirm) {
+        $('#notification-bar').text('Please confirm your password');
+      } else
+      if(data.password != data.confirm) {
+        $('#notification-bar').text('Password and Confirmation must match');
+      } else {
+        superagent
+          .post('/api/signup')
+          .send(JSON.stringify(data))
+          .then(result => {
+            const body = JSON.parse(result.text);
+            const token = body.token;
+            const userId = body.payload.id;
+            Cookies.set('id', userId, { expires: 7} );
+            Cookies.set('token',token, { expires: 7 });
+            Cookies.set('username',data.username, { expires: 7 });
+            document.location.href = '/';
+          })
+          .catch((err) => {
+            $('#notification-bar').text('Problem with signup. Try again.');
+          });
+      }
     } else {
-      superagent
-        .post('/api/signup')
-        .send(JSON.stringify(data))
-        .then(result => {
-          let token = JSON.parse(result.text);
-          Cookies.set('token',token.token, { expires: 7 });
-          Cookies.set('username',data.username, { expires: 7 });
-          document.location.href = '/';
-        });
+      alert('Already signed in.');
     }
   };
 

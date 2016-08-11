@@ -13,34 +13,33 @@
 
       })
       .catch(err => {
-        console.log(err);
         $('#notification-bar').text('Error occurred getting series list');
       });
   };
 
-  series.viewBriefs = function () {
-    $('#series-list').on('click', '.installments-brief', function(e) {
-      e.preventDefault();
-      if ($(this).hasClass('active')) {
-        $(this).removeClass('active').addClass('inactive');
-        superagent
-          .get('api/installments/' + $(this).data('id'))
-          .then(data => {
-            data.body.forEach(e => {
-              e.releaseDate = moment(e.releaseDate).format('MM-DD-YYYY');
-              toHtml('brief-install', e, `#details-${this.id}`);
-            });
-          })
-          .catch(err => {
-            console.log(err);
-            $('#notification-bar').text('Error occurred getting installments list');
-          });
-      } else {
-        $(this).removeClass('inactive').addClass('active');
-        $('.details-display').empty();
-      }
-    });
-  };
+  // series.viewBriefs = function () {
+  //   $('#series-list').on('click', '.installments-brief', function(e) {
+  //     e.preventDefault();
+  //     if ($(this).hasClass('active')) {
+  //       $(this).removeClass('active').addClass('inactive');
+  //       superagent
+  //         .get('api/installments/' + $(this).data('id'))
+  //         .then(data => {
+  //           data.body.forEach(e => {
+  //             e.releaseDate = moment(e.releaseDate).format('MM-DD-YYYY');
+  //             toHtml('brief-install', e, `#details-${this.id}`);
+  //           });
+  //         })
+  //         .catch(err => {
+  //           console.log(err);
+  //           $('#notification-bar').text('Error occurred getting installments list');
+  //         });
+  //     } else {
+  //       $(this).removeClass('inactive').addClass('active');
+  //       $('.details-display').empty();
+  //     }
+  //   });
+  // };
 
   series.viewSeries = function() {
     $('#series-list').on('click', '.series-name', renderSeriesOverview);
@@ -70,12 +69,11 @@
       });
     })
     .catch( err => {
-      console.log(err);
       $('#notification-bar').text('Error occurred getting installments list');
     });
   };
 
-  series.approvalButton = function() {
+  series.approvalButton = function () {
     let loginId = Cookies.get('id');
     let token = Cookies.get('token');
 
@@ -101,7 +99,6 @@
         renderSeriesOverview(series);
       })
       .catch( err => {
-        console.log(err);
         $('#notification-bar').text('Error occurred approving/unapproving installment');
       });
     });
@@ -109,6 +106,6 @@
 
   series.viewSeries();
   series.getSeries();
-  series.viewBriefs();
+  // series.viewBriefs();
   module.series = series;
 })(window);
