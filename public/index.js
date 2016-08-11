@@ -1,19 +1,12 @@
-(function(module){
+'use strict';
 
-  'use strict';
+(function(module){
 
   const user = {};
 
   // let seriesToHtml;//, installmentsToHtml;
   //
   // const loginUser = Cookies.get('username');
-  const token = Cookies.get('token');
-
-  if(token) {
-    $('#new-series-span').html('<a href="series-new.html"><button>New</button></a>');
-    // $('#new-installment-span').html('<a href="installment-new.html"><button>New</button></a>');
-    //$('#new-user-span').html('<a href="series-new.html"><button>New</button></a>');
-  }
 
   Handlebars.registerHelper('if', function(conditional, options) {
     if(conditional) {
@@ -114,10 +107,6 @@
   //   $('#login-form').show();
   //   // $('#user-options').hide();
   // });
-
-
-
-
 
   module.user = user;
 })(window);

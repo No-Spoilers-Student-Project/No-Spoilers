@@ -45,10 +45,8 @@
           .send(JSON.stringify(data))
           .then(result => {
             const body = JSON.parse(result.text);
-            const token = body.token;
-            const userId = body.payload.id;
-            Cookies.set('id', userId, { expires: 7} );
-            Cookies.set('token',token, { expires: 7 });
+            Cookies.set('id', body.payload.id, { expires: 7} );
+            Cookies.set('token',body.token, { expires: 7 });
             Cookies.set('username',data.username, { expires: 7 });
             document.location.href = '/';
           })
