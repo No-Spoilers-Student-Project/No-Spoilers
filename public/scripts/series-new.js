@@ -102,22 +102,43 @@
   addSeries.setAddSeriesButtonListener = function() {
     $('#results').on('click', '.add-series', function() {
       const seriesId = $(this).data('seriesid');
-      $.ajax({
-        url: '/api/tvdb/' + seriesId,
-        type: 'GET'
-      })
-      .done( function(result) {
-        const data = {
-          name: result.SeriesName,
-          description: result.Overview,
-          tvdbid: result.id,
-          firstAired: result.FirstAired
-        };
-        if(!data.name || data.name==='') $('#results').html('<h3>No results</h3>');
-        else {
-          pushSeries(data);
-        }
-      });
+
+      superagent
+        .get('/api/tvdb/' + seriesId)
+        .then(result => {
+          console.log(result);
+          const data = {
+            name: result.body.SeriesName,
+            description: result.body.Overview,
+            tvdbid: result.body.id,
+            firstAired: result.body.FirstAired
+          };
+          if(!data.name || data.name==='') $('#results').html('<h3>No results</h3>');
+          else {
+            pushSeries(data);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          $('#results').html('Series already added.');
+        });
+
+      // $.ajax({
+      //   url: '/api/tvdb/' + seriesId,
+      //   type: 'GET'
+      // })
+      // .done( function(result) {
+      //   const data = {
+      //     name: result.SeriesName,
+      //     description: result.Overview,
+      //     tvdbid: result.id,
+      //     firstAired: result.FirstAired
+      //   };
+      //   if(!data.name || data.name==='') $('#results').html('<h3>No results</h3>');
+      //   else {
+      //     pushSeries(data);
+      //   }
+      // });
     });
   };
 
