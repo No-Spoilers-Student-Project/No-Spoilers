@@ -11,6 +11,7 @@
       <div class="installment-box" id="{{this._id}}">
         <img src="{{this.imageLink}}" style="float:right;" />
         <h5><span class="installment-title">{{this.name}}</span></h5>
+        <p>Season: {{season}} Episode: {{episode}}</p>
         <p>Release Date: <span>{{this.releaseDate}}</span></p>
         {{#if this.summary}}<p>Summary: <span>{{this.summary}}</span></p>{{/if}}
         {{#if this.approved}}
