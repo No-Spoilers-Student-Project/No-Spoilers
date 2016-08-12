@@ -106,7 +106,6 @@
         dataObj.add = [];
         dataObj.remove = [ $(this).data('id') ];
       }
-
       superagent
       .put('/api/users/' + loginId + '/approvals')
       .set({token})
