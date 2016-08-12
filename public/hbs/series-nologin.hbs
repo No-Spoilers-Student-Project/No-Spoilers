@@ -1,0 +1,15 @@
+  <h1>No Spoilers</h1>
+  <h2>Series Overview</h2>
+  <div>
+    <span id="series-name">{{name}}</span>
+    <span id="episode-count">{{installmentCount}} episodes</span>
+  </div>
+  <p>Series Overview: {{description}}</p>
+  <div id="installment-list-display">
+    {{#each installments}}
+      <div class="installment-box" id="{{this._id}}">
+        <span class="nologin-title">{{season}}-{{episode}} {{this.name}}</span>
+        <span class="nologin-date">Release Date: {{this.releaseDate}}</span>
+      </div>
+    {{/each}}
+  </div>
