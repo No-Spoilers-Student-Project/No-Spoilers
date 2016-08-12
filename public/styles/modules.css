@@ -19,3 +19,32 @@
 #login-form, #signup-form {
   text-align: center;
 }
+
+.series-details-template {
+  border-radius: 1rem;
+  box-shadow: 1rem 1rem black;
+  padding: 2rem;
+}
+
+.installment-box {
+  padding: 1rem;
+
+  max-width: 95%;
+  margin: 0 auto;
+  border: 2px solid black;
+  background-color: #bbf;
+  overflow: hidden;
+}
+
+.installment-box button {
+  background-color: #bbb;
+}
+
+#series-name {
+  font-size: 3rem;
+}
+
+#episode-count {
+  font-size: 2rem;
+  float:right;
+}

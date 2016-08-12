@@ -85,9 +85,9 @@ a {
 
 /* Add new series page */
 
-.series-option, .episode-list, .installment-box, .series-details-template{
+.series-option, .episode-list, .series-details-template{
   max-width: 758px;
-  margin: 5rem auto;
+  margin: 2rem auto;
   border: 2px solid black;
   background-color: #bbf;
   overflow: hidden;
@@ -106,14 +106,6 @@ a {
 .episode-list {
   background-color: #aaf;
   padding: 1.5rem;
-}
-
-.installment-box {
-  padding: 2rem;
-}
-
-.installment-box button {
-  background-color: #bbb;
 }
 
 /* Landing page */
