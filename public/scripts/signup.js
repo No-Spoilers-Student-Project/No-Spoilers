@@ -1,7 +1,7 @@
 (function(module) {
   const signup = {};
 
-  // Event listener setup for using the sign up form. Called from toHtml in 
+  // Event listener setup for using the sign up form. Called from toHtml in
   signup.startSignup = function() {
     $('#signup-form button').on('click', event => {
       event.preventDefault();

@@ -18,6 +18,6 @@
       console.log('error getting user series:',err);
     });
   };
-  
+
   module.user = user;
 })(window);
