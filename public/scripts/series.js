@@ -147,21 +147,40 @@
         console.log('Error occurred submitting summary',err);
       });
     }
-    // put'api/installments/:id/summary'
+  };
 
-    // obj: summary:String
+  series.removeInstallment = function() {
+    event.preventDefault();
+    removeListeners();
+
+    const instId = $(this).data('id');
+    const token = Cookies.get('token');
+    const seriesId = $(this).data('series');
+
+    superagent
+    .delete('api/installments/' + instId)
+    .set({token})
+    .then( () => {
+      series.renderSeriesOverview(seriesId);
+    })
+    .catch( err => {
+      $('#notification-bar').text('Error occurred deleting installment');
+      console.log('Error occurred deleting installment',err);
+    });
   };
 
   function setListeners() {
     $('#landing-page').on('click', '.approval-button', series.approval);
     $('#landing-page').on('click', '.edit-summary-button', series.editSummary);
     $('#landing-page').on('click', '#submit-summary', series.submitSummary);
+    $('#landing-page').on('click', '.delete-button', series.removeInstallment);
   }
 
   function removeListeners() {
     $('#landing-page').off('click', '.approval-button');
     $('#landing-page').off('click', '.edit-summary-button');
     $('#landing-page').off('click', '#submit-summary');
+    $('#landing-page').off('click', '.delete-button');
   }
 
   module.series = series;

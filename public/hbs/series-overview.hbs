@@ -19,6 +19,7 @@
         {{/if}}
         {{#if this.unapproved}}
           <button class="approval-button" data-unapproved="true" data-id="{{this._id}}" data-series="{{this.series}}">Approve</button>
+          <button class="delete-button" data-unapproved="true" data-id="{{this._id}}" data-series="{{this.series}}">Remove this Episode</button>
         {{/if}}
         {{#if edit}}
           <div class="sumary-edit-box">
