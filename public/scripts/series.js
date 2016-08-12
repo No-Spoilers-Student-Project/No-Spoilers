@@ -46,7 +46,7 @@
     });
   }
 
-  // Sets up a listener to switch to the series overview view for a specific series
+  //Sets up a listener to switch to the series overview view for a specific series
   series.viewSeriesListener = function() {
     $('#landing-page').on('click', '.series-details-template', function(){
       $('#landing-page').empty();
@@ -115,9 +115,8 @@
     });
   };
 
-  series.renderLandingPage();
-  series.viewSeriesListener();
-  series.homeLinkListener();
+  
+  
   // series.viewBriefsListener();
   module.series = series;
 })(window);

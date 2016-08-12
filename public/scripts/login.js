@@ -1,7 +1,6 @@
 (function(module) {
 
   const login = {};
-  let token = Cookies.get('token');
 
   //let loginId = Cookies.get('id');
 
@@ -47,9 +46,10 @@
         Cookies.set('id', userId, { expires: 7} );
         Cookies.set('token',token, { expires: 7 });
         Cookies.set('username',data.username, { expires: 7 });
-
         login.userOptions(token); // set up navbar for logged in state
-        user.getSeries(userId); // render user's active series
+        // user.getSeries(userId); // render user's active series
+        // series.viewSeriesListener();
+        series.renderLandingPage();
       })
       .catch( function(err) {
         console.log('Login error',err);
@@ -158,7 +158,7 @@
   //     });
   // };
 
-  login.userOptions(token);
+  
 
   module.login = login;
 })(window);
