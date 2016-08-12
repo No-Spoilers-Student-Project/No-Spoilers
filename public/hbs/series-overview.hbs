@@ -11,19 +11,29 @@
       <div class="installment-box" id="{{this._id}}">
         <img src="{{this.imageLink}}" style="float:right;" />
         <h5><span class="installment-title">{{this.name}}</span></h5>
+        <p>Season: {{season}} Episode: {{episode}}</p>
         <p>Release Date: <span>{{this.releaseDate}}</span></p>
         {{#if this.summary}}<p>Summary: <span>{{this.summary}}</span></p>{{/if}}
         {{#if this.approved}}
           <button class="approval-button" data-approved="true" data-id="{{this._id}}" data-series="{{this.series}}">Unapprove</button>
+          <button class="edit-date-button" data-id="{{this._id}}" data-series="{{this.series}}">Edit Air Date</button>
           <button class="edit-summary-button" data-id="{{this._id}}" data-series="{{this.series}}">Edit Summary</button>
         {{/if}}
         {{#if this.unapproved}}
           <button class="approval-button" data-unapproved="true" data-id="{{this._id}}" data-series="{{this.series}}">Approve</button>
+          <button class="edit-date-button" data-id="{{this._id}}" data-series="{{this.series}}">Edit Air Date</button>
+          <button class="delete-button" data-unapproved="true" data-id="{{this._id}}" data-series="{{this.series}}">Remove this Episode</button>
         {{/if}}
-        {{#if edit}}
+        {{#if editSummary}}
           <div class="sumary-edit-box">
             <textarea name="edit-box" id="summary-textarea" rows="15">{{this.summary}}</textarea>
             <p><button id="submit-summary" data-id="{{this._id}}" data-series="{{this.series}}">Submit Changes</button></p>
+          </div>
+        {{/if}}
+        {{#if editDate}}
+          <div class="date-edit-field">
+            <input name="edit-box" id="date-edit-input" value="{{this.releaseDate}}"></input>
+            <p><button id="submit-date" data-id="{{this._id}}" data-series="{{this.series}}">Submit Change</button></p>
           </div>
         {{/if}}
       </div>
