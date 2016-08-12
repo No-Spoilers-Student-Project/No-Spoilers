@@ -125,3 +125,10 @@ a {
 #add-series-button {
   float: right;
 }
+
+.alert {
+  color: white;
+  background-color: red;
+  padding: 1rem;
+  font-size: 2rem;
+}

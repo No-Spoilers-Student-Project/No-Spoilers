@@ -1,16 +1,6 @@
 (function(module) {
   const signup = {};
 
-  //  signup.showForm();
-  // signup.showForm = function() {
-  //   $('#signup-link,#signup-button').on('click', function(event) {
-  //     event.preventDefault();
-  //     $('#signup-form').show();
-  //     $('#login-form').hide();
-  //     // $('#user-options').hide();
-  //   });
-  // };
-
   // Event listener setup for using the sign up form. Called from toHtml in
   signup.startSignup = function() {
     $('#signup-form button').on('click', event => {
@@ -37,15 +27,28 @@
       $('#notification-bar').text('Password and Confirmation must match');
     } else {
       superagent
-        .post('/api/signup')
-        .send(JSON.stringify(data))
-        .then(result => {
-          const data = result.body;
-          Cookies.set('id',data.payload.id, { expires: 7 });
+      .post('/api/signup')
+      .send(JSON.stringify(data))
+      .then( result => {
+        const data = JSON.parse(result.text);
+        if(data.error) {
+          $('#notification-bar').attr('class','alert');
+          $('#notification-bar').text('Error: ' + data.error);
+        }
+        else {
+          $('#notification-bar').removeClass('alert');
+          $('#notification-bar').empty();
+
           Cookies.set('token',data.token, { expires: 7 });
+          Cookies.set('id',data.payload.id, { expires: 7 });
           Cookies.set('username',data.payload.username, { expires: 7 });
           login.userOptions(data.token);
-        });
+          series.renderLandingPage();
+        }
+      })
+      .catch( err => {
+        console.log('error in signup request',err);
+      });
     }
   };
 
