@@ -11,7 +11,7 @@
   //   });
   // };
 
-  // Event listener setup for using the sign up form. Called from toHtml in 
+  // Event listener setup for using the sign up form. Called from toHtml in
   signup.startSignup = function() {
     $('#signup-form button').on('click', event => {
       event.preventDefault();
@@ -36,16 +36,14 @@
     if(data.password != data.confirm) {
       $('#notification-bar').text('Password and Confirmation must match');
     } else {
-      //console.log('data sending to /api/signup:',JSON.stringify(data));
       superagent
         .post('/api/signup')
         .send(JSON.stringify(data))
         .then(result => {
-          const data = JSON.parse(result.text);
-          //console.log(token);
-          Cookies.set('id',data._id, { expires: 7 });
+          const data = result.body;
+          Cookies.set('id',data.payload.id, { expires: 7 });
           Cookies.set('token',data.token, { expires: 7 });
-          Cookies.set('username',data.username, { expires: 7 });
+          Cookies.set('username',data.payload.username, { expires: 7 });
           login.userOptions(data.token);
         });
     }
