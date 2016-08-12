@@ -139,7 +139,7 @@
           tvdbid: episode.id,
           releaseDate: episode.FirstAired,
           series: localSeriesId,
-          imageLink: 'https://thetvdb.com/banners/' + episode.filename,
+          imageLink: 'http://thetvdb.com/banners/' + episode.filename,
           season: episode.SeasonNumber,
           episode: episode.EpisodeNumber
         };
