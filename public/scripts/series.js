@@ -52,7 +52,8 @@
   series.viewSeriesListener = function() {
     $('#landing-page').on('click', '.series-details-template', function(){
       window.scrollTo(0,0);
-      series.renderSeriesOverview($(this).data('id'));
+      const token = Cookies.get('token');
+      if (token) series.renderSeriesOverview($(this).data('id'));
     });
   };
 
