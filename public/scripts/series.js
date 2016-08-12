@@ -81,7 +81,11 @@
           }
         });
         seriesData.body.installments = installmentData.body;
-        toHtml('series-overview', seriesData.body, '#landing-page');
+        if(loginId) {
+          toHtml('series-overview', seriesData.body, '#landing-page');
+        } else {
+          toHtml('series-nologin', seriesData.body, '#landing-page');
+        }
         setListeners();
       });
     })

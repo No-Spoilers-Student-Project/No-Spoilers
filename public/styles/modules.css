@@ -48,3 +48,11 @@
   font-size: 2rem;
   float:right;
 }
+
+.nologin-title {
+  font-size: 2rem;
+}
+
+.nologin-date {
+  float:right;
+}
