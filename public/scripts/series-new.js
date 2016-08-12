@@ -39,11 +39,12 @@
             type: 'GET'
           })
           .done( function(result) {
-            const bookSeriesToHtml = Handlebars.compile($('#book-result-template').html());
+            // const bookSeriesToHtml = Handlebars.compile($('#book-result-template').html());
             const obj = { data: result };
             if(obj.data==='') $('#results').html('<h3>No results</h3>');
             else {
-              $('#results').html(bookSeriesToHtml(obj));
+              toHtml('book-result',obj,'#results');
+              // $('#results').html(bookSeriesToHtml(obj));
               $('#series-form button').text('New Search');
             }
           });
