@@ -58,13 +58,13 @@
   };
 
   // Part 1 of rendering Series Overview View
-  series.renderSeriesOverview = function(series) {
+  series.renderSeriesOverview = function(series,editId) {
     const loginId = Cookies.get('id');
-    getApprovedData(series,loginId);
+    getApprovedData(series,loginId,editId);
   };
 
   // Part 2 of rendering Series Overview View
-  function getApprovedData(seriesId,loginId) {
+  function getApprovedData(seriesId,loginId,editId) {
     superagent
     .get('api/series/' + seriesId)
     .then( function(seriesData) {
@@ -76,10 +76,11 @@
       .then( function(installmentData) {
         installmentData.body.forEach( function(show, index, arr) {
           arr[index].releaseDate = moment(show.releaseDate).format('MM-DD-YYYY');
+          if(show._id === editId) arr[index].edit = 'true';
         });
         seriesData.body.installments = installmentData.body;
         toHtml('series-overview', seriesData.body, '#landing-page');
-        series.approvalButton();
+        setListeners();
       });
     })
     .catch( err => {
@@ -90,36 +91,79 @@
 
   // Part 3 of rendering Series Overview View
   // Sets up a listener to handle installment approvals
-  series.approvalButton = function() {
+  series.approval = function(event) {
+    event.preventDefault();
+    removeListeners();
     const loginId = Cookies.get('id');
     const token = Cookies.get('token');
+    const seriesId = $(this).data('series');
+    const dataObj = {};
+    if($(this).data('unapproved')) {
+      dataObj.add = [ $(this).data('id') ];
+      dataObj.remove = [];
+    }
+    else if($(this).data('approved')) {
+      dataObj.add = [];
+      dataObj.remove = [ $(this).data('id') ];
+    }
+    superagent
+    .put('/api/users/' + loginId + '/approvals')
+    .set({token})
+    .send(dataObj)
+    .then( function() {
+      series.renderSeriesOverview(seriesId);
+    })
+    .catch( err => {
+      $('#notification-bar').text('Error occurred approving/unapproving installment');
+      console.log('Error occurred approving/unapproving installment',err);
+    });
+  };
 
-    $('#landing-page').on('click', '.approval-button', function(e){
-      e.preventDefault();
-      $('#landing-page').off('click', '.approval-button');
-      const seriesId = $(this).data('series');
-      const dataObj = {};
-      if($(this).data('unapproved')) {
-        dataObj.add = [ $(this).data('id') ];
-        dataObj.remove = [];
-      }
-      else if($(this).data('approved')) {
-        dataObj.add = [];
-        dataObj.remove = [ $(this).data('id') ];
-      }
+  series.editSummary = function(event) {
+    event.preventDefault();
+    removeListeners();
+    const installmentId = $(this).data('id');
+    const seriesId = $(this).data('series');
+    series.renderSeriesOverview(seriesId,installmentId);
+  };
+
+  series.submitSummary = function() {
+    event.preventDefault();
+    removeListeners();
+    const newSummary = $('#summary-textarea').val();
+    const instId = $(this).data('id');
+    const seriesId = $(this).data('series');
+    const token = Cookies.get('token');
+
+    if(newSummary) {
       superagent
-      .put('/api/users/' + loginId + '/approvals')
+      .put('api/installments/' + instId + '/summary')
       .set({token})
-      .send(dataObj)
+      .send({summary:newSummary})
       .then( function() {
         series.renderSeriesOverview(seriesId);
       })
       .catch( err => {
-        $('#notification-bar').text('Error occurred approving/unapproving installment');
-        console.log('Error occurred approving/unapproving installment',err);
+        $('#notification-bar').text('Error occurred submitting summary');
+        console.log('Error occurred submitting summary',err);
       });
-    });
+    }
+    // put'api/installments/:id/summary'
+
+    // obj: summary:String
   };
+
+  function setListeners() {
+    $('#landing-page').on('click', '.approval-button', series.approval);
+    $('#landing-page').on('click', '.edit-summary-button', series.editSummary);
+    $('#landing-page').on('click', '#submit-summary', series.submitSummary);
+  }
+
+  function removeListeners() {
+    $('#landing-page').off('click', '.approval-button');
+    $('#landing-page').off('click', '.edit-summary-button');
+    $('#landing-page').off('click', '#submit-summary');
+  }
 
   module.series = series;
 })(window);
