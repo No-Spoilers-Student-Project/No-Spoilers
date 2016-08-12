@@ -1,0 +1,21 @@
+/* Landing page */
+
+
+#landing-page h1 {
+  border: 2px solid black;
+  padding: 1rem;
+}
+
+#landing-page h4{
+  display: none;
+  text-align: center;
+  margin-top: 10%;
+}
+
+/*#landing-page {
+  margin-top: 25%;
+}*/
+
+#login-form, #signup-form {
+  text-align: center;
+}

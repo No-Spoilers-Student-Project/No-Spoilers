@@ -2,8 +2,6 @@
 
 (function(module) {
 
-  const token = Cookies.get('token');
-
   const addSeries = {};
 
   // Button Click: Search remote APIs for series
@@ -26,14 +24,10 @@
             type: 'GET'
           })
           .done( function(result) {
-            //const tvSeriesToHtml = Handlebars.compile($('#tv-result-template').html());
             const obj = { data: result };
             if(obj.data==='') $('#results').html('<h3>No results</h3>');
             else {
               toHtml('tv-result',obj,'#results');
-              //$('#results').html(tvSeriesToHtml(obj));
-              //$('#series-form button').text('New Search');
-              //window.location.href = 'series-detail.html?id=' + result._id;
             }
           });
         }
@@ -44,7 +38,6 @@
             url: '/api/series/search/goodreads/' + data.name,
             type: 'GET'
           })
-          // $.post('/api/series', JSON.stringify(data))
           .done( function(result) {
             const bookSeriesToHtml = Handlebars.compile($('#book-result-template').html());
             const obj = { data: result };
@@ -52,7 +45,6 @@
             else {
               $('#results').html(bookSeriesToHtml(obj));
               $('#series-form button').text('New Search');
-              //window.location.href = 'series-detail.html?id=' + result._id;
             }
           });
         }
@@ -77,7 +69,6 @@
           type: 'GET'
         })
         .done( function(result) {
-          //const episodesToHtml = Handlebars.compile($('#tv-episodes-template').html());
           result.sort( function(a,b) {
             if(a.FirstAired == b.FirstAired) {
               return a.EpisodeNumber < b.EpisodeNumber ? -1 : 1;
@@ -89,9 +80,6 @@
           if(obj.data==='') $('#eipsodes-' + seriesId).html('<h3>No results</h3>');
           else {
             toHtml('tv-episode',obj,'#eipsodes-' + seriesId);
-
-            //$('#eipsodes-' + seriesId).html(episodesToHtml(obj));
-            //window.location.href = 'series-detail.html?id=' + result._id;
           }
         });
       }
@@ -102,47 +90,29 @@
   addSeries.setAddSeriesButtonListener = function() {
     $('#results').on('click', '.add-series', function() {
       const seriesId = $(this).data('seriesid');
-
       superagent
-        .get('/api/tvdb/' + seriesId)
-        .then(result => {
-          console.log(result);
-          const data = {
-            name: result.body.SeriesName,
-            description: result.body.Overview,
-            tvdbid: result.body.id,
-            firstAired: result.body.FirstAired
-          };
-          if(!data.name || data.name==='') $('#results').html('<h3>No results</h3>');
-          else {
-            pushSeries(data);
-          }
-        })
-        .catch(err => {
-          console.log(err);
-          $('#results').html('Series already added.');
-        });
-
-      // $.ajax({
-      //   url: '/api/tvdb/' + seriesId,
-      //   type: 'GET'
-      // })
-      // .done( function(result) {
-      //   const data = {
-      //     name: result.SeriesName,
-      //     description: result.Overview,
-      //     tvdbid: result.id,
-      //     firstAired: result.FirstAired
-      //   };
-      //   if(!data.name || data.name==='') $('#results').html('<h3>No results</h3>');
-      //   else {
-      //     pushSeries(data);
-      //   }
-      // });
+      .get('/api/tvdb/' + seriesId)
+      .then(result => {
+        const data = {
+          name: result.body.SeriesName,
+          description: result.body.Overview,
+          tvdbid: result.body.id,
+          firstAired: result.body.FirstAired
+        };
+        if(!data.name || data.name==='') $('#results').html('<h3>No results</h3>');
+        else {
+          pushSeries(data);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        $('#results').html('Series already added.');
+      });
     });
   };
 
   function pushSeries(data) {
+    const token = Cookies.get('token');
     $.ajax({
       url: '/api/series/',
       type: 'POST',
@@ -150,14 +120,14 @@
       data: JSON.stringify(data)
     })
     .done( function(result) {
-      pushInstallments(result.tvdbid,result._id);
+      pushInstallments(result.tvdbid,result._id,token);
     })
     .fail( function(err) {
       console.log('Error: ' + err.status + ' ' + err.statusText + ' - ' + err.responseText);
     });
   }
 
-  function pushInstallments(tvdbSeriesId,localSeriesId) {
+  function pushInstallments(tvdbSeriesId,localSeriesId,token) {
     superagent
     .get('/api/tvdb/episodes/' + tvdbSeriesId)
     .then( function(result) {

@@ -6,73 +6,30 @@
   <link rel="stylesheet" type="text/css" href="./lib/styles/normalize.css">
   <link rel="stylesheet" type="text/css" href="./lib/styles/skeleton.css">
   <link rel="stylesheet" type="text/css" href="./styles/layout.css">
+  <link rel="stylesheet" type="text/css" href="./styles/modules.css">
 </head>
 <body>
   <div id="above-footer-container">
     <header>
+
       <!-- nav -->
       <nav class="container">
         <div class="row">
           <div class="twelve columns">
             <ul id="nav-buttons">
-
-              <li><a href="/" id="home-link">Home</a></li>
-              <li><a href="" id="signup-link">Sign Up!</a></li>
-              <li><a href="" id="login-link">Login</a></li>
-              <li><a href="" id="about-link">About</a></li>
+              <li><a href="" id="home-link">No Spoilers</a></li>
+              <span id="login-info">
+              </span>
             </ul>
           </div>
         </div>
       </nav>
       <!-- /nav -->
-    </header>
-    <main>
-      <div id="notification-bar">
-      </div>
-      <div id="landing-page">
-      </div>
-      <div id="user-options"></div>
-      <form id="login-form">
-        <div>
-          <label for="name">Username:</label>
-          <input name="name" type="text" id="username" required />
-        </div>
-        <div>
-          <label for="pass">Password:</label>
-          <input name="pass" type="password" id="password" required />
-        </div>
-        <div class="button">
-          <button type="submit">Log In</button>
-        </div>
-      </form>
 
-      <form id="signup-form">
-        <div>
-          <label for="name">Username:</label>
-          <input name="name" type="text" id="signupUsername" required />
-        </div>
-        <div>
-          <label for="pass">Password:</label>
-          <input name="pass" type="password" id="signupPassword" required />
-        </div>
-        <div>
-          <label for="conf">Confirm:</label>
-          <input name="conf" type="password" id="confirm" required />
-        </div>
-        <div class="button">
-          <button type="submit">Sign Up</button>
-        </div>
-      </form>
-
-    <section id="series-details"></section>
-
-    <section id="user-page" style="display: none;">
-      <a href="/"><button id="back-to-main">Back to Main Page</button></a>
-      <h2>Your Series Overview</h2>
-      <h5>Click on a Series Name to Add/Remove Approvals</h5>
-      <div id="user-series"></div>
-    </section>
-
+  </header>
+  <main>
+    <div id="notification-bar"></div> <!-- div for showing errors/successes to user -->
+    <div id="landing-page" class="container"></div> <!-- main div for content -->
     </main>
   </div>
   <footer>
@@ -87,11 +44,13 @@
   <script src="lib/scripts/js.cookie.js"></script>
 
   <script src="scripts/series-new.js"></script>
-  <script src="scripts/template.js"></script>
   <script src="scripts/to-html.js"></script>
   <script src="scripts/user.js"></script>
   <script src="scripts/login.js"></script>
   <script src="scripts/signup.js"></script>
   <script src="scripts/series.js"></script>
   <script src="index.js"></script>
+  <script>
+    initAll();
+  </script>
 </html>
