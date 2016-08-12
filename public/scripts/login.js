@@ -1,8 +1,8 @@
 (function(module) {
 
   const login = {};
-  
-  //let tempToken = Cookies.get('token');
+  let token = Cookies.get('token');
+
   //let loginId = Cookies.get('id');
 
   // if(tempToken) {
@@ -20,8 +20,6 @@
   //     // $('#user-options').hide();
   //   });
   // };
-
-  login.startLogin();
 
   login.startLogin = function() {
     $('#login-form button').on('click', function(event) {
@@ -70,27 +68,32 @@
   };
 
   // This method render the Username / login / signup in the navbar
-  login.userOptions();
-  login.userOptions = function (token) {
+  login.userOptions = function(token) {
+    $('body').off('click', '#logout');
+    $('#signup-link').off('click');
+    $('#login-link').off('click');
+
     if(token) {
       const loginUser = Cookies.get('username');
       //$('#new-series-span').html('<a href=""><button>New</button></a>');
       // $('#user-options').html(`<button id="logout">Log Out</button> <button id="go-user">User Page</button> <button id="go-home" style="display: none;">Home Page</button></p>`);
       // $('#signup-link').parent().remove();
 
-      $('#login-link').attr('id', 'logout');
-      let $hello = $('<li></li>').text('Hello, ' + loginUser + '!');
-      $hello.attr('id', 'greeting');
-      $('#login-link').text('Logout');
-      $('#login-info').append($hello);
+      //$('#login-link').attr('id', 'logout');
+      
+      let htmlString = '<li id="username"><a href="" id="username-link">Hello, ' + loginUser + '!</a></li>';
+      htmlString += '<li><a href="" id="logout">Logout</a></li>';
+      $('#login-info').empty().html(htmlString);
       $('#nav-buttons li:first-child').siblings().attr('class', 'nav-links');
     } else {
       // Render logged out options
+      $('#login-info').empty().html('<li><a href="" id="signup-link">Sign Up!</a></li><li><a href="" id="login-link">Login</a></li>');
       // $('#user-options').html('<button id="login-button">Log In</button> <button id="signup-button">Sign Up</button>');
     }
+    login.setLoginButtonListeners();
   };
 
-  login.setLoginButtonListeners(); // Needs to be called again when changing buttons
+
   login.setLoginButtonListeners = function() {
     $('body').on('click', '#logout', function() {
       Cookies.remove('token');
@@ -155,6 +158,7 @@
   //     });
   // };
 
-  
+  login.userOptions(token);
+
   module.login = login;
 })(window);

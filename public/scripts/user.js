@@ -27,7 +27,10 @@
     superagent
     .get(`/api/series/user/${id}`)
     .then( result => {
-      toHtml('series', result.body, '#user-series');
+      toHtml('series', result.body, '#landing-page');
+    })
+    .catch( err => {
+      console.log('error getting user series:',err);
     });
   };
 
