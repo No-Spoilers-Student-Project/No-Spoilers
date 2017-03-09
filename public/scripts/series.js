@@ -21,8 +21,11 @@
       toHtml('brief-series', data, '#series-list', function(){
         const token = Cookies.get('token');
         if(token) {
+          $('#welcome-message').hide();
           $('#add-series-button').html('<button id="add-new-series-button">Add New Series</button>');
           $('#add-new-series-button').on('click', renderAddSeries);
+        } else {
+          $('#welcome-message').show();
         }
       });
     })

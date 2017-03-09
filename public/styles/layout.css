@@ -114,6 +114,10 @@ a {
   color: blue;
 }
 
+#welcome-message {
+  display: none;
+}
+
 #add-series-button {
   float: right;
 }
