@@ -20,7 +20,7 @@
     "url": "https://github.com/No-Spoilers/No-Spoilers.git/issues"
   },
   "engines": {
-    "node": "6.3.1"
+    "node": "6.11.x"
   },
   "homepage": "https://github.com/No-Spoilers/No-Spoilers.git#readme",
   "devDependencies": {
